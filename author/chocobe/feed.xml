@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/author/chocobe/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2021-05-11T16:41:00+09:00</updated>
+  <updated>2021-05-11T18:23:37+09:00</updated>
   <id>http://localhost:4000/author/chocobe/feed.xml</id>
 
   
@@ -30,6 +30,184 @@
   
   
 
+  
+    <entry>
+      <title type="html">#02 Github Page를 위한 Jekyll 환경구축</title>
+      <link href="http://localhost:4000/github-page-02" rel="alternate" type="text/html" title="#02 Github Page를 위한 Jekyll 환경구축" />
+      <published>2021-05-10T19:00:00+09:00</published>
+      <updated>2021-05-10T19:00:00+09:00</updated>
+      <id>http://localhost:4000/github-page-02</id>
+      <content type="html" xml:base="http://localhost:4000/github-page-02">&lt;p&gt;Github Page 구축을 편하게 하기 위한 &lt;span class=&quot;span-highlighter&quot;&gt;정적 홈페이지 생성기&lt;/span&gt;인 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt;을 설치해 보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;우리가 만들고 운영할 블로그는 &lt;span class=&quot;span-highlighter&quot;&gt;정보공유&lt;/span&gt;와 &lt;span class=&quot;span-highlighter&quot;&gt;기록&lt;/span&gt;을 목적으로 하므로 디자인이 중요치 않다(😱)고 생각할 수도 있습니다.&lt;/p&gt;
+
+&lt;p&gt;하지만 매일 보고, 만들고, 관리할 내 블로그가 보기 불편하게 만들어 졌다면, 볼때마다 스트레스가 될 것 같습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;우리가 사용할 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt; 은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Theme&lt;/code&gt; 라는 무료 템플릿을 사용할 수 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Jekyll Theme &lt;a href=&quot;http://jekyllthemes.org/&quot; target=&quot;_blank&quot;&gt;http://jekyllthemes.org/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;레이아웃, 디자인을 템플릿으로 사용할 수 있고, 우리는 설정과 수정만으로 블로그를 만들 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;이러한 이유로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt;을 사용하는 것이고, 다음과 같은 요소를 설치해 보겠습니다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Ruby&lt;/code&gt; 설치&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bundler&lt;/code&gt; 설치&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll Theme&lt;/code&gt; 다운로드 - &lt;span class=&quot;span-highlighter&quot;&gt;Jasper2&lt;/span&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gem&lt;/code&gt; 설치&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;로컬서버&lt;/code&gt; 실행&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;01-ruby-다운로드-및-설치&quot;&gt;01) &lt;code class=&quot;highlighter-rouge&quot;&gt;Ruby&lt;/code&gt; 다운로드 및 설치&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ruby&lt;/code&gt;로 만들어 졌기 때문에, 우리가 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt; 을 로컬에서 사용하기 위해서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ruby&lt;/code&gt;를 설치해야 합니다.&lt;/p&gt;
+
+&lt;p&gt;먼저 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ruby&lt;/code&gt; 공식 홈페이지에서 OS에 맞는 설치파일을 다운로드 받고 설치 합니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;다운로드 링크 &lt;a href=&quot;https://rubyinstaller.org/downloads/&quot; target=&quot;_blank&quot;&gt;https://rubyinstaller.org/downloads/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/02_githubPage/02_githubPage_01.png&quot; class=&quot;shadow&quot; alt=&quot;루비 다운로드 페이지&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;02-bundler-설치&quot;&gt;02) &lt;code class=&quot;highlighter-rouge&quot;&gt;bundler&lt;/code&gt; 설치&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Ruby&lt;/code&gt; 에서는 라이브러리 또는 페키지를 &lt;span class=&quot;span-highlighter&quot;&gt;gem&lt;/span&gt; 이라고 부릅니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll Theme&lt;/code&gt;을 빌드하기 위한 도구로 &lt;code class=&quot;highlighter-rouge&quot;&gt;bundler&lt;/code&gt; 가 필요하며, &lt;code class=&quot;highlighter-rouge&quot;&gt;터미널(cmd)&lt;/code&gt; 로 설치할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bundler&lt;/code&gt; 설치를 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;터미널(cmd)&lt;/code&gt; 에 다음 명령어를 실행 시킵니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install bundler
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;03-jekyll-theme-다운로드---jasper2&quot;&gt;03) &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll Theme&lt;/code&gt; 다운로드 - &lt;span class=&quot;span-highlighter&quot;&gt;Jasper2&lt;/span&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll Theme&lt;/code&gt; 들은 설정이 모두 다릅니다.&lt;/p&gt;
+
+&lt;p&gt;홈페이지 구축까지 시도해본 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll Theme&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jasper2&lt;/code&gt; 뿐이므로, &lt;span class=&quot;span-highlighter&quot;&gt;Jasper2&lt;/span&gt;를 다운로드 받겠습니다.&lt;/p&gt;
+
+&lt;p&gt;Google에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll jasper2&lt;/code&gt;를 검색하면, 다운로드 페이지를 찾을 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/02_githubPage/02_githubPage_02.png&quot; class=&quot;shadow&quot; alt=&quot;Jekyll Theme 다운로드 페이지&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;다운로드한 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll Theme&lt;/code&gt;가 우리의 블로그가 됩니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;04-gem-설치&quot;&gt;04) &lt;code class=&quot;highlighter-rouge&quot;&gt;gem&lt;/code&gt; 설치&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ruby&lt;/code&gt;로 만들어졌기 때문에, 의존성 파일도 &lt;code class=&quot;highlighter-rouge&quot;&gt;gem&lt;/code&gt; 으로 구성되어 있습니다.&lt;/p&gt;
+
+&lt;p&gt;원하는 IDE를 사용하여 다운로드한 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll Theme&lt;/code&gt;를 엽니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/02_githubPage/02_githubPage_03.png&quot; class=&quot;shadow&quot; alt=&quot;Jekyll Theme 프로젝트 열기&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;프로젝트가 열리면, &lt;code class=&quot;highlighter-rouge&quot;&gt;터미널&lt;/code&gt;을 열고 다음 명령을 실행하여, &lt;code class=&quot;highlighter-rouge&quot;&gt;gem&lt;/code&gt;을 설치 합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/02_githubPage/02_githubPage_04.png&quot; class=&quot;shadow&quot; alt=&quot;gem 설치&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;설치가 완료 되었다면, 다음과 같은 메시지를 볼 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/02_githubPage/02_githubPage_05.png&quot; class=&quot;shadow&quot; alt=&quot;gem 설치결과&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;05-로컬서버-실행&quot;&gt;05) &lt;code class=&quot;highlighter-rouge&quot;&gt;로컬서버&lt;/code&gt; 실행&lt;/h3&gt;
+
+&lt;p&gt;이제 우리의 프로젝트를 실행할 준비가 완료 되었습니다.&lt;/p&gt;
+
+&lt;p&gt;터미널에 다음 명령으로 로컬서버를 실행 합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;기본 port는 &lt;code class=&quot;highlighter-rouge&quot;&gt;4000&lt;/code&gt;번 이며, 변경할 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;--port 번호&lt;/code&gt; 옵션을 설정하여 실행 합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll s &lt;span class=&quot;nt&quot;&gt;--port&lt;/span&gt; 8080
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;로컬서버를 실행하면, 우리의 블로그를 볼 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/02_githubPage/02_githubPage_06.png&quot; class=&quot;shadow&quot; alt=&quot;로컬서버 실행결과&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;이로써 우리의 블로그가 만들어 졌습니다.&lt;/p&gt;
+
+&lt;p&gt;다음 포스팅 부터는 블로그의 &lt;code class=&quot;highlighter-rouge&quot;&gt;세부설정&lt;/code&gt;에 대해 알아보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;출처: &lt;a href=&quot;https://moon9342.github.io/jekyll-start&quot; target=&quot;_blank&quot;&gt;https://moon9342.github.io/jekyll-start&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
+  Github Page 전체 목차 입니다.
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-01&quot;&gt;
+      #01 Github Page 포스팅 개요
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-02&quot;&gt;
+      #02 Github Page를 위한 Jekyll 환경구축
+    &lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>초코비</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="github page" />
+      
+
+      
+        <summary type="html">Github Page 구축을 편하게 하기 위한 정적 홈페이지 생성기인 Jekyll을 설치해 보겠습니다.</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">#01 Github Page 포스팅 개요</title>
@@ -100,11 +278,11 @@
     &lt;/a&gt;
   &lt;/li&gt;
 
-&lt;!--  &lt;li&gt;--&gt;
-&lt;!--    &lt;a href=&quot;./javascript-second&quot;&gt;--&gt;
-&lt;!--      #02 Javascript 개발환경 만들기--&gt;
-&lt;!--    &lt;/a&gt;--&gt;
-&lt;!--  &lt;/li&gt;--&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-02&quot;&gt;
+      #02 Github Page를 위한 Jekyll 환경구축
+    &lt;/a&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;</content>
