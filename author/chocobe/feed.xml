@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/author/chocobe/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2021-05-11T08:34:47+09:00</updated>
+  <updated>2021-05-11T16:41:00+09:00</updated>
   <id>http://localhost:4000/author/chocobe/feed.xml</id>
 
   
@@ -30,6 +30,110 @@
   
   
 
+  
+    <entry>
+      <title type="html">#01 Github Page 포스팅 개요</title>
+      <link href="http://localhost:4000/github-page-01" rel="alternate" type="text/html" title="#01 Github Page 포스팅 개요" />
+      <published>2021-05-10T18:00:00+09:00</published>
+      <updated>2021-05-10T18:00:00+09:00</updated>
+      <id>http://localhost:4000/github-page-01</id>
+      <content type="html" xml:base="http://localhost:4000/github-page-01">&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Github Page&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Github&lt;/code&gt;에서 제공하는 &lt;span class=&quot;span-highlighter&quot;&gt;정적 홈페이지 호스팅 서비스&lt;/span&gt; 입니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;공식 홈페이지: &lt;a href=&quot;https://pages.github.com/&quot; target=&quot;_blank&quot;&gt;https://pages.github.com/&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;정적 홈페이지&lt;/code&gt;는 게시물(정보)를 공유하기 위한 목적으로, DB를 사용하지 않는 홈페이지로 이해하면 될 것 같습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;요즘은 많은 개발자 분들이 &lt;code class=&quot;highlighter-rouge&quot;&gt;기술 블로그&lt;/code&gt;를 운영하며, 소중한 지식과 정보를 공유해 주고 있습니다.&lt;/p&gt;
+
+&lt;p&gt;만약 자신만의 &lt;code class=&quot;highlighter-rouge&quot;&gt;기술 블로그&lt;/code&gt;를 만든다면, Back-End와 DB를 사용하지 않고 &lt;code class=&quot;highlighter-rouge&quot;&gt;기술 포스팅&lt;/code&gt;에만 집중할 수 있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;정적 홈페이지&lt;/code&gt;로도 충분할 것입니다.&lt;/p&gt;
+
+&lt;p&gt;이 블로그 역시 &lt;code class=&quot;highlighter-rouge&quot;&gt;Github Page&lt;/code&gt;에 호스팅한 &lt;code class=&quot;highlighter-rouge&quot;&gt;정적 홈페이지&lt;/code&gt; 입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/01_githubPage/01_githubPage_01.png&quot; class=&quot;shadow&quot; alt=&quot;초코비 홈페이지 예시&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;정적 홈페이지를 만들기 위한 선택지는 다양한 방법이 있습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;네이버 블로그&lt;/li&gt;
+  &lt;li&gt;티스토리&lt;/li&gt;
+  &lt;li&gt;기타 등등..&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;위와 같은 방법들은 이미 제공하는 템플릿에 맞춰야 하기 때문에, 커스터마이징에 한계가 있습니다.&lt;/p&gt;
+
+&lt;p&gt;만약 자신만의 유니크한 블로그를 만들고 싶다면, &lt;code class=&quot;highlighter-rouge&quot;&gt;Github Page&lt;/code&gt; 는 좋은 선택이 될 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Github Page&lt;/code&gt;는 오로지 호스팅할 수 있는 &lt;span class=&quot;span-highlighter&quot;&gt;공간만을 제공&lt;/span&gt;하기 때문에, 처음부터 끝까지 만들어야 하며, 이러한 특징 때문에 자신만의 블로그를 만들 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;물론 정말로 처음부터 끝까지 만들지는 않습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt; 이라는 &lt;span class=&quot;span-highlighter&quot;&gt;정적 홈페이지 생성기&lt;/span&gt;를 사용하여 마음에 드는 템플릿을 선택하고 커스터마이징 하는 방식으로 만들 수 있기 때문에, 설정만으로도 블로그가 만들어 집니다.&lt;/p&gt;
+
+&lt;p&gt;(여기서 커스터마이징 까지 한다면, 유니크한 블로그가 되겠죠 ㅎㅎ)&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;저의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Github Page&lt;/code&gt; 포스팅 시리즈는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Github Page&lt;/code&gt;를 사용하여 홈페이지의 기본을 구축하고, 배포하는 방법에 대해 작성하고자 합니다.&lt;/p&gt;
+
+&lt;p&gt;다양한 시도를 해본 상태가 아닌, 현재 저의 블로그 구축방법에 대한 기록 정도로 읽어주시면 감사하겠습니다 😊&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;출처: &lt;a href=&quot;https://moon9342.github.io/jekyll-start&quot; target=&quot;_blank&quot;&gt;https://moon9342.github.io/jekyll-start&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
+  Github Page 전체 목차 입니다.
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-01&quot;&gt;
+      #01 Github Page 포스팅 개요
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+&lt;!--  &lt;li&gt;--&gt;
+&lt;!--    &lt;a href=&quot;./javascript-second&quot;&gt;--&gt;
+&lt;!--      #02 Javascript 개발환경 만들기--&gt;
+&lt;!--    &lt;/a&gt;--&gt;
+&lt;!--  &lt;/li&gt;--&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>초코비</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="github page" />
+      
+
+      
+        <summary type="html">Github Page는 Github에서 제공하는 정적 홈페이지 호스팅 서비스 입니다.</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">Typescript 02</title>
