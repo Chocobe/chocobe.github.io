@@ -1,4 +1,84 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-05-12T17:59:05+09:00</updated><id>http://localhost:4000/</id><title type="html">초코비 Front-End</title><subtitle>FrontEnd 기술 블로그 입니다</subtitle><entry><title type="html">#05 태그 설정 (tags.yml)</title><link href="http://localhost:4000/github-page-05" rel="alternate" type="text/html" title="#05 태그 설정 (tags.yml)" /><published>2021-05-11T22:00:00+09:00</published><updated>2021-05-11T22:00:00+09:00</updated><id>http://localhost:4000/github-page-05</id><content type="html" xml:base="http://localhost:4000/github-page-05">&lt;p&gt;이번 포스팅에서는 게시글에 사용할 &lt;span class=&quot;span-highlighter&quot;&gt;태그(tag)&lt;/span&gt;를 작성해 보겠습니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-05-13T05:39:46+09:00</updated><id>http://localhost:4000/</id><title type="html">초코비 Front-End</title><subtitle>FrontEnd 기술 블로그 입니다</subtitle><entry><title type="html">#06 메뉴 설정 (navigation.html)</title><link href="http://localhost:4000/github-page-06" rel="alternate" type="text/html" title="#06 메뉴 설정 (navigation.html)" /><published>2021-05-12T18:00:00+09:00</published><updated>2021-05-12T18:00:00+09:00</updated><id>http://localhost:4000/github-page-06</id><content type="html" xml:base="http://localhost:4000/github-page-06">&lt;p&gt;이번 포스팅은 &lt;span class=&quot;span-highlighter&quot;&gt;메뉴(navigation.html)&lt;/span&gt;설정을 해보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;메뉴는 이전 포스팅에서 설정했던 &lt;span class=&quot;span-highlighter&quot;&gt;태그(tag)&lt;/span&gt;를 기반으로 동작하게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;먼저 메뉴 설정파일인 &lt;code class=&quot;highlighter-rouge&quot;&gt;navigation.html&lt;/code&gt;파일을 열어봅니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;경로: 루트/_includes/navigation.html
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;navigation.html&lt;/code&gt;에 설정된 내용이 메뉴로 출력되게 되는데, 현재 상태는 다음과 같습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/06_githubPage/06_githubPage_01.png&quot; class=&quot;shadow&quot; alt=&quot;메뉴&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;navigation.html&lt;/code&gt;에 작성된 &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;li&amp;gt;&lt;/code&gt;하나가 메뉴가 되어 출력되며, &lt;code class=&quot;highlighter-rouge&quot;&gt;Jasper2&lt;/code&gt;의 기본메뉴가 작성되어 있는 상태 입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;navigation.html&lt;/code&gt;에서 필요없는 메뉴는 모두 삭제하고, 이전 포스팅에서 만들었던 태그인 &lt;code class=&quot;highlighter-rouge&quot;&gt;test-tag&lt;/code&gt;를 메뉴로 작성해 줍니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;li&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;role=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;menuitem&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;a&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/tag/test-tag&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    Test Tag
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/li&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;navigation.html&lt;/code&gt;파일을 수정한 후, 로컬서버를 실행하면 우리가 설정했던 메뉴만 나타납니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/05_githubPage/05_githubPage_03.png&quot; class=&quot;shadow&quot; alt=&quot;메뉴설정 결과 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/05_githubPage/05_githubPage_04.png&quot; class=&quot;shadow&quot; alt=&quot;메뉴설정 결과 2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이로써 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jasper2&lt;/code&gt; 테마를 사용하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;Github Page&lt;/code&gt;만들기 기본 설정을 모두 하였습니다.&lt;/p&gt;
+
+&lt;p&gt;다음 포스팅에서는 &lt;span class=&quot;span-highlighter&quot;&gt;게시물 작성&lt;/span&gt;을 알아 보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;참고: &lt;a href=&quot;https://moon9342.github.io/jekyll-start&quot; target=&quot;_blank&quot;&gt;https://moon9342.github.io/jekyll-start&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
+  Github Page 전체 목차 입니다.
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-01&quot;&gt;
+      #01 Github Page 포스팅 개요
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-02&quot;&gt;
+      #02 Github Page를 위한 Jekyll 환경구축
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-03&quot;&gt;
+      #03 사이트 설정 (_config.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-04&quot;&gt;
+      #04 작성자(저자) 설정 (authors.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-05&quot;&gt;
+      #05 태그 설정 (tags.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;</content><author><name>초코비</name></author><category term="github page" /><summary type="html">이번 포스팅은 메뉴(navigation.html)설정을 해보겠습니다.</summary></entry><entry><title type="html">#05 태그 설정 (tags.yml)</title><link href="http://localhost:4000/github-page-05" rel="alternate" type="text/html" title="#05 태그 설정 (tags.yml)" /><published>2021-05-11T22:00:00+09:00</published><updated>2021-05-11T22:00:00+09:00</updated><id>http://localhost:4000/github-page-05</id><content type="html" xml:base="http://localhost:4000/github-page-05">&lt;p&gt;이번 포스팅에서는 게시글에 사용할 &lt;span class=&quot;span-highlighter&quot;&gt;태그(tag)&lt;/span&gt;를 작성해 보겠습니다.&lt;/p&gt;
 
 &lt;p&gt;태그는 다양한 게시글을 주제별로 식별하기 위해 사용합니다.&lt;/p&gt;
 
@@ -817,48 +897,4 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;감사합니다 🐫&lt;/p&gt;</content><author><name>초코비</name></author><category term="javascript" /><summary type="html">Javascript 포스팅은 여러 절로 구성되어 있습니다. #01 Javascript 개발환경 만들기 #02 Javascript 개발환경 만들기</summary></entry><entry><title type="html">Webpack Second</title><link href="http://localhost:4000/webpack-second" rel="alternate" type="text/html" title="Webpack Second" /><published>2021-05-09T01:20:00+09:00</published><updated>2021-05-09T01:20:00+09:00</updated><id>http://localhost:4000/webpack-second</id><content type="html" xml:base="http://localhost:4000/webpack-second">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
-  Webpack 포스팅은 여러 절로 구성되어 있습니다.
-&lt;/span&gt;&lt;/p&gt;
-
-&lt;ul class=&quot;table-of-contents-list&quot;&gt;
-  &lt;li&gt;
-    &lt;a href=&quot;./webpack-first&quot;&gt;
-      #01 Webpack 개발환경 만들기
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./webpack-second&quot;&gt;
-      #02 Webpack 개발환경 만들기
-    &lt;/a&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;02-webpack-개발환경-만들기&quot;&gt;#02&amp;gt; Webpack 개발환경 만들기&lt;/h2&gt;
-
-&lt;p&gt;세번째 포스팅 입니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;예제코드&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;path&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;none&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;app.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;app.bundle.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;dist&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
-  
-  &lt;span class=&quot;na&quot;&gt;exclude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;node_modules&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;dist&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;감사합니다 🐫&lt;/p&gt;</content><author><name>초코비</name></author><category term="webpack" /><summary type="html">Webpack 포스팅은 여러 절로 구성되어 있습니다. #01 Webpack 개발환경 만들기 #02 Webpack 개발환경 만들기</summary></entry></feed>
+&lt;p&gt;감사합니다 🐫&lt;/p&gt;</content><author><name>초코비</name></author><category term="javascript" /><summary type="html">Javascript 포스팅은 여러 절로 구성되어 있습니다. #01 Javascript 개발환경 만들기 #02 Javascript 개발환경 만들기</summary></entry></feed>
