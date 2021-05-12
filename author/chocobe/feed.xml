@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/author/chocobe/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2021-05-12T16:09:52+09:00</updated>
+  <updated>2021-05-12T17:59:05+09:00</updated>
   <id>http://localhost:4000/author/chocobe/feed.xml</id>
 
   
@@ -30,6 +30,283 @@
   
   
 
+  
+    <entry>
+      <title type="html">#04 작성자(저자) 설정 (authors.yml)</title>
+      <link href="http://localhost:4000/github-page-04" rel="alternate" type="text/html" title="#04 작성자(저자) 설정 (authors.yml)" />
+      <published>2021-05-11T22:00:00+09:00</published>
+      <updated>2021-05-11T22:00:00+09:00</updated>
+      <id>http://localhost:4000/github-page-04</id>
+      <content type="html" xml:base="http://localhost:4000/github-page-04">&lt;p&gt;이번 포스트에서는 작성한 글의 작성자(저자) 설정을 위해, &lt;span class=&quot;span-highlighter&quot;&gt;authors.yml&lt;/span&gt; 파일을 수정해 보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jasper2&lt;/code&gt;는 여러명의 작성자(저자)를 설정할 수 있게 지원합니다.&lt;/p&gt;
+
+&lt;p&gt;용도가 개인 블로그라면 작성자(저자)는 한명 뿐이지만, 회사의 기술 블로그로 만든다면 여러명의 작성자(저자)가 필요합니다.&lt;/p&gt;
+
+&lt;p&gt;이러한 설정을 &lt;span class=&quot;span-highlighter&quot;&gt;authors.yml&lt;/span&gt; 파일에서 할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&quot;span-highlighter&quot;&gt;authors.yml&lt;/span&gt;파일 경로는 다음과 같습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;루트/_data/authors.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;파일 내부가 복잡해 보이지만 형식은 다음과 같습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;유저 변수명 1&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# 유저 상세정보&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;유저 변수명 2&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;# 유저 상세정보&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;우리는 개인 블로그이므로, 유저 한명을 제외하고 나머지는 지워 줍니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;ghost&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ghost&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;Ghost&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;url_full&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://jekyller.github.io/jasper2/&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;jekyller.github.io/jasper2&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;bio&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;The professional publishing platform&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;picture&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;assets/images/ghost.png&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;facebook&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ghost&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;twitter&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;tryghost&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;cover&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;False&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;이제 우리가 포스팅한 글의 작성자(저자)로 출력하고 싶은 정보를 설정해 줍니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;chocobe&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;c1&quot;&gt;# 사용자 ID - 상위 변수명과 동일하게 작성합니다.&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;username&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;chocobe&lt;/span&gt;
+  
+  &lt;span class=&quot;c1&quot;&gt;# 작성자(저자) 명 - 실제 화면에 출력될 저자명 입니다.&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;초코비&lt;/span&gt;
+  
+  &lt;span class=&quot;c1&quot;&gt;# 작성자의 홈페이지 주소를 넣을 수 있습니다.&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;url_full&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;http://github.com/Chocobe&lt;/span&gt;  
+  &lt;span class=&quot;na&quot;&gt;url&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;chocobe.github.io&lt;/span&gt;
+  
+  &lt;span class=&quot;c1&quot;&gt;# 저자에 대한 간단한 설명을 출력합니다.&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;bio&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;저자 설명부&lt;/span&gt;
+
+  &lt;span class=&quot;c1&quot;&gt;# 썸네일 이미지를 사용할 수 있습니다.&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;picture&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;assets/images/chocobe/chocobe.png&lt;/span&gt;
+
+  &lt;span class=&quot;na&quot;&gt;facebook&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;twitter&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;cover&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;False&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;지금까지 설정한 작성자(저자)가 정상적으로 동작하는지 테스트를 위해, 샘플 포스팅을 수정해 봅니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;경로: 루트/_posts/2017-07-27-welcome.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;파일을 열고 &lt;code class=&quot;highlighter-rouge&quot;&gt;author&lt;/code&gt; 부분에 우리가 작성한 작성자(저자)명 으로 수정해 줍니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/04_githubPage/04_githubPage_01.png&quot; class=&quot;shadow&quot; alt=&quot;author 테스트&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;로컬서버&lt;/code&gt;를 실행 시키고, 메인화면의 첫번째 포스팅을 보면 저자가 적용된 것을 볼 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/04_githubPage/04_githubPage_02.png&quot; class=&quot;shadow&quot; alt=&quot;author 적용결과&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;다음 포스팅에서는 각 포스팅의 &lt;code class=&quot;highlighter-rouge&quot;&gt;tag&lt;/code&gt;설정에 대해 알아보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;출처: &lt;a href=&quot;https://moon9342.github.io/jekyll-start&quot; target=&quot;_blank&quot;&gt;https://moon9342.github.io/jekyll-start&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
+  Github Page 전체 목차 입니다.
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-01&quot;&gt;
+      #01 Github Page 포스팅 개요
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-02&quot;&gt;
+      #02 Github Page를 위한 Jekyll 환경구축
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-03&quot;&gt;
+      #03 사이트 설정 (_config.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-04&quot;&gt;
+      #04 작성자(저자) 설정 (authors.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-05&quot;&gt;
+      #05 태그 설정 (tags.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>초코비</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="github page" />
+      
+
+      
+        <summary type="html">이번 포스트에서는 작성한 글의 작성자(저자) 설정을 위해, authors.yml 파일을 수정해 보겠습니다.</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">#05 태그 설정 (tags.yml)</title>
+      <link href="http://localhost:4000/github-page-05" rel="alternate" type="text/html" title="#05 태그 설정 (tags.yml)" />
+      <published>2021-05-11T22:00:00+09:00</published>
+      <updated>2021-05-11T22:00:00+09:00</updated>
+      <id>http://localhost:4000/github-page-05</id>
+      <content type="html" xml:base="http://localhost:4000/github-page-05">&lt;p&gt;이번 포스팅에서는 게시글에 사용할 &lt;span class=&quot;span-highlighter&quot;&gt;태그(tag)&lt;/span&gt;를 작성해 보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;태그는 다양한 게시글을 주제별로 식별하기 위해 사용합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jasper2&lt;/code&gt;에서 태그도 같은 역할을 하게되며, 메인 메뉴에서 활용하게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;먼저 태그 설정파일인 &lt;span class=&quot;span-highlighter&quot;&gt;tags.yml&lt;/span&gt;파일을 살펴 보겠습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;경로: 루트/_data/tags.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/05_githubPage/05_githubPage_01.png&quot; class=&quot;shadow&quot; alt=&quot;tags.yml 파일&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tags.yml&lt;/code&gt; 파일의 구성은 다음과 같습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;태그변수명&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;태그명&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;태그 설명&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;cover&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;태그의 배너 이미지&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tags.yml&lt;/code&gt;의 기존 내용을 모두 지우고, &lt;code class=&quot;highlighter-rouge&quot;&gt;test tag&lt;/code&gt; 라는 태그를 만들어 보겠습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;test-tag&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;test-tag&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;테스트용 태그 입니다&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;cover&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;새로만든 태그가 동작하는지 확인하기 위해, &lt;code class=&quot;highlighter-rouge&quot;&gt;2017-07-27-welcome.md&lt;/code&gt; 글의 태그를 수정해 보겠습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;경로: 루트/_posts/2017-07-27-welcome.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;2017-07-27-welcome.md&lt;/code&gt; 파일 설정부분 중 &lt;code class=&quot;highlighter-rouge&quot;&gt;tag&lt;/code&gt; 부분을 &lt;code class=&quot;highlighter-rouge&quot;&gt;test tag&lt;/code&gt; 로 변경해 줍니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/05_githubPage/05_githubPage_02.png&quot; class=&quot;shadow&quot; alt=&quot;tag 변경&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이제 태그 생성과 적용이 완료 되었습니다.&lt;/p&gt;
+
+&lt;p&gt;마지막으로 적용된 태그를 확인하기 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;로컬서버&lt;/code&gt;를 실행 시키면 다음과 같은 결과를 볼 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/05_githubPage/05_githubPage_03.png&quot; class=&quot;shadow&quot; alt=&quot;tag 변경 결과 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/05_githubPage/05_githubPage_04.png&quot; class=&quot;shadow&quot; alt=&quot;tag 변경 결과 2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;출처: &lt;a href=&quot;https://moon9342.github.io/jekyll-start&quot; target=&quot;_blank&quot;&gt;https://moon9342.github.io/jekyll-start&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
+  Github Page 전체 목차 입니다.
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-01&quot;&gt;
+      #01 Github Page 포스팅 개요
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-02&quot;&gt;
+      #02 Github Page를 위한 Jekyll 환경구축
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-03&quot;&gt;
+      #03 사이트 설정 (_config.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-04&quot;&gt;
+      #04 작성자(저자) 설정 (authors.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-05&quot;&gt;
+      #05 태그 설정 (tags.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>초코비</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="github page" />
+      
+
+      
+        <summary type="html">이번 포스팅에서는 게시글에 사용할 태그(tag)를 작성해 보겠습니다.</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">#03 사이트 설정 (_config.yml)</title>
@@ -213,6 +490,18 @@
   &lt;li&gt;
     &lt;a href=&quot;./github-page-03&quot;&gt;
       #03 사이트 설정 (_config.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-04&quot;&gt;
+      #04 작성자(저자) 설정 (authors.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-05&quot;&gt;
+      #05 태그 설정 (tags.yml)
     &lt;/a&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -399,6 +688,18 @@
       #03 사이트 설정 (_config.yml)
     &lt;/a&gt;
   &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-04&quot;&gt;
+      #04 작성자(저자) 설정 (authors.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-05&quot;&gt;
+      #05 태그 설정 (tags.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;</content>
@@ -509,6 +810,18 @@
   &lt;li&gt;
     &lt;a href=&quot;./github-page-03&quot;&gt;
       #03 사이트 설정 (_config.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-04&quot;&gt;
+      #04 작성자(저자) 설정 (authors.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-05&quot;&gt;
+      #05 태그 설정 (tags.yml)
     &lt;/a&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -888,82 +1201,6 @@
   &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
   
   &lt;span class=&quot;na&quot;&gt;exclude&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;node_modules&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;dist&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;감사합니다 🐫&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>초코비</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="webpack" />
-      
-
-      
-        <summary type="html">Webpack 포스팅은 여러 절로 구성되어 있습니다. #01 Webpack 개발환경 만들기 #02 Webpack 개발환경 만들기</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">Webpack First</title>
-      <link href="http://localhost:4000/webpack-first" rel="alternate" type="text/html" title="Webpack First" />
-      <published>2021-05-09T00:31:00+09:00</published>
-      <updated>2021-05-09T00:31:00+09:00</updated>
-      <id>http://localhost:4000/webpack-first</id>
-      <content type="html" xml:base="http://localhost:4000/webpack-first">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
-  Webpack 포스팅은 여러 절로 구성되어 있습니다.
-&lt;/span&gt;&lt;/p&gt;
-
-&lt;ul class=&quot;table-of-contents-list&quot;&gt;
-  &lt;li&gt;
-    &lt;a href=&quot;./webpack-first&quot;&gt;
-      #01 Webpack 개발환경 만들기
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./webpack-second&quot;&gt;
-      #02 Webpack 개발환경 만들기
-    &lt;/a&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;01-webpack-개발환경-만들기&quot;&gt;#01&amp;gt; Webpack 개발환경 만들기&lt;/h2&gt;
-
-&lt;p&gt;세번째 포스팅 입니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;예제코드&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;path&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;none&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;entry&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;app.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-  &lt;span class=&quot;na&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;filename&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;app.bundle.js&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;__dirname&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;dist&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
