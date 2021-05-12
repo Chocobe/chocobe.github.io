@@ -1,4 +1,124 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-05-13T05:39:46+09:00</updated><id>http://localhost:4000/</id><title type="html">초코비 Front-End</title><subtitle>FrontEnd 기술 블로그 입니다</subtitle><entry><title type="html">#06 메뉴 설정 (navigation.html)</title><link href="http://localhost:4000/github-page-06" rel="alternate" type="text/html" title="#06 메뉴 설정 (navigation.html)" /><published>2021-05-12T18:00:00+09:00</published><updated>2021-05-12T18:00:00+09:00</updated><id>http://localhost:4000/github-page-06</id><content type="html" xml:base="http://localhost:4000/github-page-06">&lt;p&gt;이번 포스팅은 &lt;span class=&quot;span-highlighter&quot;&gt;메뉴(navigation.html)&lt;/span&gt;설정을 해보겠습니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-05-13T06:21:05+09:00</updated><id>http://localhost:4000/</id><title type="html">초코비 Front-End</title><subtitle>FrontEnd 기술 블로그 입니다</subtitle><entry><title type="html">#07 게시글 작성하기</title><link href="http://localhost:4000/github-page-07" rel="alternate" type="text/html" title="#07 게시글 작성하기" /><published>2021-05-12T19:00:00+09:00</published><updated>2021-05-12T19:00:00+09:00</updated><id>http://localhost:4000/github-page-07</id><content type="html" xml:base="http://localhost:4000/github-page-07">&lt;p&gt;드디어 마지막 단계인 &lt;span class=&quot;span-highlighter&quot;&gt;게시글 작성하기&lt;/span&gt; 입니다.&lt;/p&gt;
+
+&lt;p&gt;작성할 페이지들은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Markdown&lt;/code&gt;파일로 만들게 되며, &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt;이 &lt;code class=&quot;highlighter-rouge&quot;&gt;HTML&lt;/code&gt;파일로 변환시켜 주고 실제 페이지가 됩니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt;은 &lt;span class=&quot;span-highlighter&quot;&gt;_posts&lt;/span&gt;폴더 아래에 있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Markdown&lt;/code&gt; 파일을 모두 &lt;code class=&quot;highlighter-rouge&quot;&gt;HTML&lt;/code&gt; 파일로 변환시켜 줍니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;경로: 루트/_posts
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;그럼 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jasper2&lt;/code&gt;의 샘플파일들은 모두 삭제하겠습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/07_githubPage/07_githubPage_01.png&quot; class=&quot;shadow&quot; alt=&quot;_posts 폴더&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이제 테스트용 게시글 하나를 만들어 보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;파일 생성 시 중요한 점은 파일명을 &lt;span class=&quot;span-highlighter&quot;&gt;년-월-일-파일명&lt;/span&gt;형식으로 만들어야 합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt;폴더 밑에 &lt;code class=&quot;highlighter-rouge&quot;&gt;2021-05-12-first-posting.md&lt;/code&gt; 파일을 생성합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-markdown highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;layout&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;post&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;current&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;post&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;cover&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 게시글의 메인 이미지&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;navigation&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;True&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;첫번째&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;&lt;span class=&quot;s&quot;&gt;포스팅&quot;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 포스팅 제목&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;date&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;2021-05-12 09:00:00&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 포스팅 날짜&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;tags&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;pi&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;test tag&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# 해당 메뉴&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;post-template&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;subclass&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;post'&lt;/span&gt;
+&lt;span class=&quot;na&quot;&gt;author&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;chocobe&lt;/span&gt;
+&lt;span class=&quot;nn&quot;&gt;---&lt;/span&gt;
+
+&lt;span class=&quot;gu&quot;&gt;## 첫번째 포스팅 입니다.&lt;/span&gt;
+&lt;span class=&quot;gt&quot;&gt;
+&amp;gt; Markdown 파일을 만들면 새로운 페이지가 생성 됩니다.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;작성한 파일을 저장하고 로컬서버를 실행하면, 새로운 포스팅을 확인할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/07_githubPage/07_githubPage_02.png&quot; class=&quot;shadow&quot; alt=&quot;포스팅 결과 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/07_githubPage/07_githubPage_03.png&quot; class=&quot;shadow&quot; alt=&quot;포스팅 결과 2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;지금까지의 과정 중, 반복 작업이 될 부분은 다음과 같습니다.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;새로운 매뉴 생성
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tags.yml&lt;/code&gt;파일에 태그 추가&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;navigation.html&lt;/code&gt;파일에 메뉴 추가&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;새로운 포스팅 생성
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt;폴더 밑에 &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-파일명.md&lt;/code&gt;형식의 파일 생성&lt;/li&gt;
+      &lt;li&gt;글작성&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;이로써 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jasper2&lt;/code&gt; 테마를 사용한 블로그 만들기를 마무리 하겠습니다.&lt;/p&gt;
+
+&lt;p&gt;감사합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;참고: &lt;a href=&quot;https://moon9342.github.io/jekyll-start&quot; target=&quot;_blank&quot;&gt;https://moon9342.github.io/jekyll-start&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
+  Github Page 전체 목차 입니다.
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-01&quot;&gt;
+      #01 Github Page 포스팅 개요
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-02&quot;&gt;
+      #02 Github Page를 위한 Jekyll 환경구축
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-03&quot;&gt;
+      #03 사이트 설정 (_config.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-04&quot;&gt;
+      #04 작성자(저자) 설정 (authors.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-05&quot;&gt;
+      #05 태그 설정 (tags.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-06&quot;&gt;
+      #06 메뉴 설정 (navigation.html)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-07&quot;&gt;
+      #07 게시글 작성하기
+    &lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;</content><author><name>초코비</name></author><category term="github page" /><summary type="html">드디어 마지막 단계인 게시글 작성하기 입니다.</summary></entry><entry><title type="html">#06 메뉴 설정 (navigation.html)</title><link href="http://localhost:4000/github-page-06" rel="alternate" type="text/html" title="#06 메뉴 설정 (navigation.html)" /><published>2021-05-12T18:00:00+09:00</published><updated>2021-05-12T18:00:00+09:00</updated><id>http://localhost:4000/github-page-06</id><content type="html" xml:base="http://localhost:4000/github-page-06">&lt;p&gt;이번 포스팅은 &lt;span class=&quot;span-highlighter&quot;&gt;메뉴(navigation.html)&lt;/span&gt;설정을 해보겠습니다.&lt;/p&gt;
 
 &lt;p&gt;메뉴는 이전 포스팅에서 설정했던 &lt;span class=&quot;span-highlighter&quot;&gt;태그(tag)&lt;/span&gt;를 기반으로 동작하게 됩니다.&lt;/p&gt;
 
@@ -74,6 +194,18 @@
   &lt;li&gt;
     &lt;a href=&quot;./github-page-05&quot;&gt;
       #05 태그 설정 (tags.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-06&quot;&gt;
+      #06 메뉴 설정 (navigation.html)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-07&quot;&gt;
+      #07 게시글 작성하기
     &lt;/a&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -164,6 +296,18 @@
   &lt;li&gt;
     &lt;a href=&quot;./github-page-05&quot;&gt;
       #05 태그 설정 (tags.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-06&quot;&gt;
+      #06 메뉴 설정 (navigation.html)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-07&quot;&gt;
+      #07 게시글 작성하기
     &lt;/a&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -283,6 +427,18 @@
   &lt;li&gt;
     &lt;a href=&quot;./github-page-05&quot;&gt;
       #05 태그 설정 (tags.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-06&quot;&gt;
+      #06 메뉴 설정 (navigation.html)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-07&quot;&gt;
+      #07 게시글 작성하기
     &lt;/a&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -477,6 +633,18 @@
       #05 태그 설정 (tags.yml)
     &lt;/a&gt;
   &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-06&quot;&gt;
+      #06 메뉴 설정 (navigation.html)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-07&quot;&gt;
+      #07 게시글 작성하기
+    &lt;/a&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;</content><author><name>초코비</name></author><category term="github page" /><summary type="html">지난 포스팅을 통해서 우리는 로컬서버에서 동작하는 홈페이지를 갖게 되었습니다.</summary></entry><entry><title type="html">#02 Github Page를 위한 Jekyll 환경구축</title><link href="http://localhost:4000/github-page-02" rel="alternate" type="text/html" title="#02 Github Page를 위한 Jekyll 환경구축" /><published>2021-05-10T19:00:00+09:00</published><updated>2021-05-10T19:00:00+09:00</updated><id>http://localhost:4000/github-page-02</id><content type="html" xml:base="http://localhost:4000/github-page-02">&lt;p&gt;Github Page 구축을 편하게 하기 위한 &lt;span class=&quot;span-highlighter&quot;&gt;정적 홈페이지 생성기&lt;/span&gt;인 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt;을 설치해 보겠습니다.&lt;/p&gt;
@@ -639,6 +807,18 @@
       #05 태그 설정 (tags.yml)
     &lt;/a&gt;
   &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-06&quot;&gt;
+      #06 메뉴 설정 (navigation.html)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-07&quot;&gt;
+      #07 게시글 작성하기
+    &lt;/a&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;</content><author><name>초코비</name></author><category term="github page" /><summary type="html">Github Page 구축을 편하게 하기 위한 정적 홈페이지 생성기인 Jekyll을 설치해 보겠습니다.</summary></entry><entry><title type="html">#01 Github Page 포스팅 개요</title><link href="http://localhost:4000/github-page-01" rel="alternate" type="text/html" title="#01 Github Page 포스팅 개요" /><published>2021-05-10T18:00:00+09:00</published><updated>2021-05-10T18:00:00+09:00</updated><id>http://localhost:4000/github-page-01</id><content type="html" xml:base="http://localhost:4000/github-page-01">&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Github Page&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Github&lt;/code&gt;에서 제공하는 &lt;span class=&quot;span-highlighter&quot;&gt;정적 홈페이지 호스팅 서비스&lt;/span&gt; 입니다.&lt;/p&gt;
@@ -727,6 +907,18 @@
   &lt;li&gt;
     &lt;a href=&quot;./github-page-05&quot;&gt;
       #05 태그 설정 (tags.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-06&quot;&gt;
+      #06 메뉴 설정 (navigation.html)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-07&quot;&gt;
+      #07 게시글 작성하기
     &lt;/a&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -854,47 +1046,4 @@
 
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
-&lt;p&gt;감사합니다 🐫&lt;/p&gt;</content><author><name>초코비</name></author><category term="typescript" /><summary type="html">Typescript 포스팅은 여러 절로 구성되어 있습니다. #01 Typescript 개발환경 만들기 #02 Typescript 개발환경 만들기</summary></entry><entry><title type="html">Javascript First</title><link href="http://localhost:4000/javascript-first" rel="alternate" type="text/html" title="Javascript First" /><published>2021-05-09T18:31:00+09:00</published><updated>2021-05-09T18:31:00+09:00</updated><id>http://localhost:4000/javascript-first</id><content type="html" xml:base="http://localhost:4000/javascript-first">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
-  Javascript 포스팅은 여러 절로 구성되어 있습니다.
-&lt;/span&gt;&lt;/p&gt;
-
-&lt;ul class=&quot;table-of-contents-list&quot;&gt;
-  &lt;li&gt;
-    &lt;a href=&quot;./javascript-first&quot;&gt;
-      #01 Javascript 개발환경 만들기
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./javascript-second&quot;&gt;
-      #02 Javascript 개발환경 만들기
-    &lt;/a&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;01-javascript-개발환경-만들기&quot;&gt;#01 Javascript 개발환경 만들기&lt;/h2&gt;
-
-&lt;p&gt;첫번째 포스팅 입니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;예제코드&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;cm&quot;&gt;/**
- * @returns { number }
- * @param { number } a
- * @param { number } b
- */&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;감사합니다 🐫&lt;/p&gt;</content><author><name>초코비</name></author><category term="javascript" /><summary type="html">Javascript 포스팅은 여러 절로 구성되어 있습니다. #01 Javascript 개발환경 만들기 #02 Javascript 개발환경 만들기</summary></entry></feed>
+&lt;p&gt;감사합니다 🐫&lt;/p&gt;</content><author><name>초코비</name></author><category term="typescript" /><summary type="html">Typescript 포스팅은 여러 절로 구성되어 있습니다. #01 Typescript 개발환경 만들기 #02 Typescript 개발환경 만들기</summary></entry></feed>

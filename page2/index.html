@@ -11,7 +11,7 @@
 
 
 
-    <title>초코비 - 초코비 Front-End</title>
+    <title>초코비 Front-End</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -53,19 +53,19 @@
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="FrontEnd 기술 블로그 입니다" />
     <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
-    <link rel="canonical" href="http://localhost:4000/author/chocobe/" />
+    <link rel="canonical" href="http://localhost:4000/page2/" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="초코비 Front-End" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="초코비 - 초코비 Front-End" />
+    <meta property="og:title" content="초코비 Front-End" />
     <meta property="og:description" content="FrontEnd 기술 블로그 입니다" />
-    <meta property="og:url" content="http://localhost:4000/author/chocobe/" />
+    <meta property="og:url" content="http://localhost:4000/page2/" />
     <meta property="og:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="초코비 - 초코비 Front-End" />
+    <meta name="twitter:title" content="초코비 Front-End" />
     <meta name="twitter:description" content="FrontEnd 기술 블로그 입니다" />
     <meta name="twitter:url" content="http://localhost:4000/" />
     <meta name="twitter:image" content="http://localhost:4000/assets/images/blog-cover.jpg" />
@@ -85,7 +85,7 @@
         "name": "초코비 Front-End",
         "logo": "http://localhost:4000/assets/images/logo/logo.svg"
     },
-    "url": "http://localhost:4000/author/chocobe/",
+    "url": "http://localhost:4000/page2/",
     "image": {
         "@type": "ImageObject",
         "url": "http://localhost:4000/assets/images/blog-cover.jpg",
@@ -94,7 +94,7 @@
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://localhost:4000/author/chocobe/"
+        "@id": "http://localhost:4000/page2/"
     },
     "description": "FrontEnd 기술 블로그 입니다"
 }
@@ -109,28 +109,30 @@
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="Author Page" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="초코비 Front-End" href="/feed.xml" />
 
 
 </head>
-<body class="author-template">
+<body class="paged archive-template">
     <div class="site-wrapper">
         <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
-        <!-- < default}} -->
-<!-- The tag above means - insert everything in this file into the {body} of the default.hbs template -->
+        <!-- < default -->
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
 
-<!-- #author  -->
-<!-- Everything inside the #author tags pulls data from the author -->
-
-    
-    <header class="site-header outer no-cover">
-        <div class="inner">
-            <nav class="site-nav">
+<!-- The big featured header, it uses blog cover image as a BG if available -->
+<header class="site-header outer " style="background-image:  url(/assets/images/blog-cover.jpg) ">
+    <div class="inner">
+        <div class="site-header-content">
+            <h1 class="site-title">
+                
+                    <img class="site-logo" src="/assets/images/logo/logo.svg" alt="초코비 Front-End"/>
+                
+            </h1>
+            <h2 class="site-description">FrontEnd 기술 블로그 입니다</h2>
+        </div>
+        <nav class="site-nav">
     <div class="site-nav-left">
-        
-            
-                <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/logo/logo.svg" alt="초코비 Front-End" /></a>
-            
         
         
             <ul class="nav" role="menu">
@@ -202,34 +204,8 @@
     </div>
 </nav>
 
-            <div class="site-header-content">
-                
-                    <img class="author-profile-image" src="/assets/images/chocobe/chocobe.png" alt="chocobe" />
-                
-                <h1 class="site-title">초코비</h1>
-                
-                    <h2 class="author-bio">Vue와 Typescript를 좋아합니다</h2>
-                
-                <div class="author-meta">
-                    
-                    <div class="author-stats">
-                        13 posts <span class="bull">&bull;</span>
-                    </div>
-                    
-                        <a class="social-link social-link-wb" href="http://github.com/Chocobe" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.5 11.957c0 6.375-5.163 11.544-11.532 11.544C5.599 23.5.5 18.125.5 11.75.5 5.542 5.37.758 11.505.511l.5-.011C18.374.5 23.5 5.582 23.5 11.957zM11.505.511c-6 6.5-6 14.98 0 22.98m1-22.98c6 6.5 6 14.977 0 22.977M2 17.479h20.063m-19.657-12h19.062m-20.968 6h22.938" stroke="#000" stroke-linejoin="round" stroke-miterlimit="10" fill="none"/></svg>
-</a>
-                    
-                    
-                    
-                    <a class="social-link social-link-rss" href="https://feedly.com/i/subscription/feed/http://localhost:4000/author/chocobe/feed.xml" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="6.18" cy="17.82" r="2.18"/><path d="M4 4.44v2.83c7.03 0 12.73 5.7 12.73 12.73h2.83c0-8.59-6.97-15.56-15.56-15.56zm0 5.66v2.83c3.9 0 7.07 3.17 7.07 7.07h2.83c0-5.47-4.43-9.9-9.9-9.9z"/></svg>
-</a>
-                </div>
-            </div>
-        </div>
-    </header>
-    
-
-<!-- /author -->
+    </div>
+</header>
 
 <!-- The main content area -->
 <main id="site-main" class="site-main outer" role="main">
@@ -240,28 +216,44 @@
             
 
 
-    <article class="post-card author-template">
+    <article class="post-card home-template">
         
-            <a class="post-card-image-link" href="/github-page-07">
-                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_githubPage.png)"></div>
+            <a class="post-card-image-link" href="/typescript-02">
+                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_typescript.png)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/github-page-07">
+            <a class="post-card-content-link" href="/typescript-02">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Github page</span>
+                                <span class="post-card-tags">Typescript</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">#07 게시글 작성하기</h2>
+                    <h2 class="post-card-title">Typescript 02</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>드디어 마지막 단계인 게시글 작성하기 입니다.
+                        <p>
+  Typescript 포스팅은 여러 절로 구성되어 있습니다.
+
+
+
+  
+    
+      #01 Typescript 개발환경 만들기
+    
+  
+
+  
+    
+      #02 Typescript 개발환경 만들기
+    
+  
+
 
 </p>
                     
@@ -288,28 +280,44 @@
         </div>
     </article>
 
-    <article class="post-card author-template">
+    <article class="post-card home-template">
         
-            <a class="post-card-image-link" href="/github-page-06">
-                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_githubPage.png)"></div>
+            <a class="post-card-image-link" href="/javascript-second">
+                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_javascript.png)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/github-page-06">
+            <a class="post-card-content-link" href="/javascript-second">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Github page</span>
+                                <span class="post-card-tags">Javascript</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">#06 메뉴 설정 (navigation.html)</h2>
+                    <h2 class="post-card-title">Javascript Second</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>이번 포스팅은 메뉴(navigation.html)설정을 해보겠습니다.
+                        <p>
+  Javascript 포스팅은 여러 절로 구성되어 있습니다.
+
+
+
+  
+    
+      #01 Javascript 개발환경 만들기
+    
+  
+
+  
+    
+      #02 Javascript 개발환경 만들기
+    
+  
+
 
 </p>
                     
@@ -336,28 +344,44 @@
         </div>
     </article>
 
-    <article class="post-card author-template">
+    <article class="post-card home-template">
         
-            <a class="post-card-image-link" href="/github-page-04">
-                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_githubPage.png)"></div>
+            <a class="post-card-image-link" href="/typescript-01">
+                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_typescript.png)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/github-page-04">
+            <a class="post-card-content-link" href="/typescript-01">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Github page</span>
+                                <span class="post-card-tags">Typescript</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">#04 작성자(저자) 설정 (authors.yml)</h2>
+                    <h2 class="post-card-title">TS 개발환경 만들기</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>이번 포스트에서는 작성한 글의 작성자(저자) 설정을 위해, authors.yml 파일을 수정해 보겠습니다.
+                        <p>
+  Typescript 포스팅은 여러 절로 구성되어 있습니다.
+
+
+
+  
+    
+      #01 Typescript 개발환경 만들기
+    
+  
+
+  
+    
+      #02 Typescript 개발환경 만들기
+    
+  
+
 
 </p>
                     
@@ -384,28 +408,44 @@
         </div>
     </article>
 
-    <article class="post-card author-template">
+    <article class="post-card home-template">
         
-            <a class="post-card-image-link" href="/github-page-05">
-                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_githubPage.png)"></div>
+            <a class="post-card-image-link" href="/javascript-first">
+                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_javascript.png)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/github-page-05">
+            <a class="post-card-content-link" href="/javascript-first">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Github page</span>
+                                <span class="post-card-tags">Javascript</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">#05 태그 설정 (tags.yml)</h2>
+                    <h2 class="post-card-title">Javascript First</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>이번 포스팅에서는 게시글에 사용할 태그(tag)를 작성해 보겠습니다.
+                        <p>
+  Javascript 포스팅은 여러 절로 구성되어 있습니다.
+
+
+
+  
+    
+      #01 Javascript 개발환경 만들기
+    
+  
+
+  
+    
+      #02 Javascript 개발환경 만들기
+    
+  
+
 
 </p>
                     
@@ -432,76 +472,44 @@
         </div>
     </article>
 
-    <article class="post-card author-template">
+    <article class="post-card home-template">
         
-            <a class="post-card-image-link" href="/github-page-03">
-                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_githubPage.png)"></div>
+            <a class="post-card-image-link" href="/webpack-second">
+                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_webpack.png)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/github-page-03">
+            <a class="post-card-content-link" href="/webpack-second">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Github page</span>
+                                <span class="post-card-tags">Webpack</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">#03 사이트 설정 (_config.yml)</h2>
+                    <h2 class="post-card-title">Webpack Second</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>지난 포스팅을 통해서 우리는 로컬서버에서 동작하는 홈페이지를 갖게 되었습니다.
+                        <p>
+  Webpack 포스팅은 여러 절로 구성되어 있습니다.
 
-</p>
-                    
-                </section>
-            </a>
-            <footer class="post-card-meta">
-                
-                    
-                        
-                        <img class="author-profile-image" src="/assets/images/chocobe/chocobe.png" alt="초코비" />
-                        
-                        <span class="post-card-author">
-                            <a href="/author/chocobe/">초코비</a>
-                        </span>
-                    
-                
-                <span class="reading-time">
-                    
-                    
-                      2 min read
-                    
-                </span>
-            </footer>
-        </div>
-    </article>
 
-    <article class="post-card author-template">
-        
-            <a class="post-card-image-link" href="/github-page-02">
-                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_githubPage.png)"></div>
-            </a>
-        
-        <div class="post-card-content">
-            <a class="post-card-content-link" href="/github-page-02">
-                <header class="post-card-header">
-                    
-                        
-                            
-                                <span class="post-card-tags">Github page</span>
-                            
-                        
-                    
 
-                    <h2 class="post-card-title">#02 Github Page를 위한 Jekyll 환경구축</h2>
-                </header>
-                <section class="post-card-excerpt">
-                    
-                        <p>Github Page 구축을 편하게 하기 위한 정적 홈페이지 생성기인 Jekyll을 설치해 보겠습니다.
+  
+    
+      #01 Webpack 개발환경 만들기
+    
+  
+
+  
+    
+      #02 Webpack 개발환경 만들기
+    
+  
+
 
 </p>
                     
@@ -528,28 +536,44 @@
         </div>
     </article>
 
-    <article class="post-card author-template">
+    <article class="post-card home-template">
         
-            <a class="post-card-image-link" href="/github-page-01">
-                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_githubPage.png)"></div>
+            <a class="post-card-image-link" href="/webpack-first">
+                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_webpack.png)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/github-page-01">
+            <a class="post-card-content-link" href="/webpack-first">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Github page</span>
+                                <span class="post-card-tags">Webpack</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">#01 Github Page 포스팅 개요</h2>
+                    <h2 class="post-card-title">Webpack First</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
-                        <p>Github Page는 Github에서 제공하는 정적 홈페이지 호스팅 서비스 입니다.
+                        <p>
+  Webpack 포스팅은 여러 절로 구성되어 있습니다.
+
+
+
+  
+    
+      #01 Webpack 개발환경 만들기
+    
+  
+
+  
+    
+      #02 Webpack 개발환경 만들기
+    
+  
+
 
 </p>
                     
@@ -588,12 +612,13 @@
             
                 <nav class="pagination" role="pagination">
     
-    <span class="page-number"> Page 1 of 2 </span>
+        
+            <a class="newer-posts" href="/" title="Previous Page">&laquo; Newer Posts</a>
+        
     
-        <a class="older-posts" href="/author/chocobe/page2/" title="Next Page">Older Posts &raquo;</a>
-    
+    <span class="page-number"> Page 2 of 2 </span>
+     
 </nav>
-
             
         
 

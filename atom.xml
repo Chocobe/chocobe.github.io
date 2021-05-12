@@ -8,6 +8,21 @@
     
       
       <item>
+        <title>#07 게시글 작성하기</title>
+        
+          <description>&lt;p&gt;드디어 마지막 단계인 &lt;span class=&quot;span-highlighter&quot;&gt;게시글 작성하기&lt;/span&gt; 입니다.&lt;/p&gt;
+
+</description>
+        
+        <pubDate>Wed, 12 May 2021 19:00:00 +0900</pubDate>
+        <link>
+        http://localhost:4000/github-page-07</link>
+        <guid isPermaLink="true">http://localhost:4000/github-page-07</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>#06 메뉴 설정 (navigation.html)</title>
         
           <description>&lt;p&gt;이번 포스팅은 &lt;span class=&quot;span-highlighter&quot;&gt;메뉴(navigation.html)&lt;/span&gt;설정을 해보겠습니다.&lt;/p&gt;
