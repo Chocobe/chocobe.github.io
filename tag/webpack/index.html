@@ -22,6 +22,10 @@
     <!-- custom.css -->
     <link rel="stylesheet" type="text/css" href="/assets/built/custom.css" />
 
+    <!-- 커스텀 스타일: Helper Class 생성부 -->
+    <!-- Prefix: .myStyle- -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/myStyle.css" />
+
     <!-- 나눔고딕  WebFont -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/nanumgothic.css">
     <!-- Hack Font -->
@@ -125,7 +129,7 @@
 
 
 
-<header class="site-header outer " style="background-image: url(/assets/images/blog-cover.jpg) ">
+<header class="site-header outer no-cover">
     <div class="inner">
         <nav class="site-nav">
     <div class="site-nav-left">
@@ -143,38 +147,44 @@
             Home
         </a>
     </li>
+    
+    <li class="nav-home" role="menuitem">
+        <a class="myStyle-font-weight-900" href="/tag/vue">
+            Vue
+        </a>
+    </li>
 
     <!-- About -->
-    <li class="nav-about" role="menuitem">
-        <a href="/about/">
-            About
-        </a>
-    </li>
+<!--    <li class="nav-about" role="menuitem">-->
+<!--        <a href="/about/">-->
+<!--            About-->
+<!--        </a>-->
+<!--    </li>-->
 
     <!-- Javascript -->
-    <li class="nav-js" role="menuitem">
-        <a href="/tag/javascript/">
-            Javascript
-        </a>
-    </li>
+<!--    <li class="nav-js" role="menuitem">-->
+<!--        <a href="/tag/javascript/">-->
+<!--            Javascript-->
+<!--        </a>-->
+<!--    </li>-->
 
     <!-- Webpack -->
-    <li class="nav-webpack" role="menuitem">
-        <a href="/tag/webpack/">
-            Webpack
-        </a>
-    </li>
+<!--    <li class="nav-webpack" role="menuitem">-->
+<!--        <a class="myStyle-font-weight-900" href="/tag/webpack/">-->
+<!--            Webpack-->
+<!--        </a>-->
+<!--    </li>-->
 
     <!-- Typescript -->
-    <li class="nav-ts" role="menuitem">
-        <a href="/tag/typescript/">
-            Typescript
-        </a>
-    </li>
+<!--    <li class="nav-ts" role="menuitem">-->
+<!--        <a href="/tag/typescript/">-->
+<!--            Typescript-->
+<!--        </a>-->
+<!--    </li>-->
 
     <!-- Github Page -->
     <li>
-        <a href="/tag/github-page">
+        <a class="myStyle-font-weight-900" href="/tag/github-page">
             Github Page
         </a>
     </li>
@@ -209,7 +219,7 @@
             <h1 class="site-title">Webpack</h1>
             <h2 class="site-description">
                 
-                    Webpack 기본설정과 Plugins 연동방법에 대해 알아봅니다.
+    			    A collection of 2 posts
                 
             </h2>
         </div>

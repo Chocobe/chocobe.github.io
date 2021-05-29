@@ -22,6 +22,10 @@
     <!-- custom.css -->
     <link rel="stylesheet" type="text/css" href="/assets/built/custom.css" />
 
+    <!-- 커스텀 스타일: Helper Class 생성부 -->
+    <!-- Prefix: .myStyle- -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/myStyle.css" />
+
     <!-- 나눔고딕  WebFont -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/nanumgothic.css">
     <!-- Hack Font -->
@@ -139,38 +143,44 @@ into the {body} of the default.hbs template -->
             Home
         </a>
     </li>
+    
+    <li class="nav-home" role="menuitem">
+        <a class="myStyle-font-weight-900" href="/tag/vue">
+            Vue
+        </a>
+    </li>
 
     <!-- About -->
-    <li class="nav-about" role="menuitem">
-        <a href="/about/">
-            About
-        </a>
-    </li>
+<!--    <li class="nav-about" role="menuitem">-->
+<!--        <a href="/about/">-->
+<!--            About-->
+<!--        </a>-->
+<!--    </li>-->
 
     <!-- Javascript -->
-    <li class="nav-js" role="menuitem">
-        <a href="/tag/javascript/">
-            Javascript
-        </a>
-    </li>
+<!--    <li class="nav-js" role="menuitem">-->
+<!--        <a href="/tag/javascript/">-->
+<!--            Javascript-->
+<!--        </a>-->
+<!--    </li>-->
 
     <!-- Webpack -->
-    <li class="nav-webpack" role="menuitem">
-        <a href="/tag/webpack/">
-            Webpack
-        </a>
-    </li>
+<!--    <li class="nav-webpack" role="menuitem">-->
+<!--        <a class="myStyle-font-weight-900" href="/tag/webpack/">-->
+<!--            Webpack-->
+<!--        </a>-->
+<!--    </li>-->
 
     <!-- Typescript -->
-    <li class="nav-ts" role="menuitem">
-        <a href="/tag/typescript/">
-            Typescript
-        </a>
-    </li>
+<!--    <li class="nav-ts" role="menuitem">-->
+<!--        <a href="/tag/typescript/">-->
+<!--            Typescript-->
+<!--        </a>-->
+<!--    </li>-->
 
     <!-- Github Page -->
     <li>
-        <a href="/tag/github-page">
+        <a class="myStyle-font-weight-900" href="/tag/github-page">
             Github Page
         </a>
     </li>
@@ -235,6 +245,9 @@ into the {body} of the default.hbs template -->
   	<li><a href="#typescript" class="tag"><span class="term alltags">typescript</span> <span class="count alltags">2</span></a></li>
   
     
+  	<li><a href="#vue" class="tag"><span class="term alltags">vue</span> <span class="count alltags">1</span></a></li>
+  
+    
   	<li><a href="#webpack" class="tag"><span class="term alltags">webpack</span> <span class="count alltags">2</span></a></li>
   
 </ul>
@@ -293,6 +306,17 @@ into the {body} of the default.hbs template -->
     
       <!-- <li class="entry-title"><a href="http://localhost:4000/typescript-01" target="_blank" title="TS 개발환경 만들기">TS 개발환경 만들기</a></li> -->
       <li class="entry-title"><a href="/typescript-01" target="_blank" title="TS 개발환경 만들기">TS 개발환경 만들기</a></li>
+    
+		</ul>
+	</article><!-- /.hentry -->
+
+  
+	<article>
+	<h2 id="vue" class="tag-heading">VUE</h2>
+		<ul>
+    
+      <!-- <li class="entry-title"><a href="http://localhost:4000/vue-01" target="_blank" title="#01 <span class='span-highlighter'>v-bind</span> 활용">#01 <span class='span-highlighter'>v-bind</span> 활용</a></li> -->
+      <li class="entry-title"><a href="/vue-01" target="_blank" title="#01 &lt;span class='span-highlighter'&gt;v-bind&lt;/span&gt; 활용">#01 <span class="span-highlighter">v-bind</span> 활용</a></li>
     
 		</ul>
 	</article><!-- /.hentry -->
