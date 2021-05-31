@@ -1,4 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-05-31T14:02:12+09:00</updated><id>http://localhost:4000/</id><title type="html">초코비 Front-End</title><subtitle>FrontEnd 기술 블로그 입니다</subtitle><entry><title type="html">#02 vue.config.js의 runtimeCompiler 옵션</title><link href="http://localhost:4000/vue-02" rel="alternate" type="text/html" title="#02 vue.config.js의 &lt;span class='span-highlighter'&gt;runtimeCompiler&lt;/span&gt; 옵션" /><published>2021-05-30T18:00:00+09:00</published><updated>2021-05-30T18:00:00+09:00</updated><id>http://localhost:4000/vue-02</id><content type="html" xml:base="http://localhost:4000/vue-02">&lt;p&gt;Vue 프로젝트의 build 파일에 &lt;code class=&quot;highlighter-rouge&quot;&gt;compiler&lt;/code&gt;를 포함시키는 방법에 대해 알아보겠습니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2021-05-31T15:17:10+09:00</updated><id>http://localhost:4000/</id><title type="html">초코비 Front-End</title><subtitle>FrontEnd 기술 블로그 입니다</subtitle><entry><title type="html">#01 Webpack의 Chunk File Grouping</title><link href="http://localhost:4000/webpack-01" rel="alternate" type="text/html" title="#01 Webpack의 Chunk File Grouping" /><published>2021-05-30T19:00:00+09:00</published><updated>2021-05-30T19:00:00+09:00</updated><id>http://localhost:4000/webpack-01</id><content type="html" xml:base="http://localhost:4000/webpack-01">&lt;p&gt;Webpack 빌드 시 생성되는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Chunk File&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Grouping&lt;/code&gt;에 대해 알아보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Chunk File&lt;/code&gt;이란, &lt;code class=&quot;highlighter-rouge&quot;&gt;코드 묶음&lt;/code&gt;을 의미 합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Webpack Build&lt;/code&gt; 시 생성되는 파일이며, &lt;code class=&quot;highlighter-rouge&quot;&gt;Lazy Loading&lt;/code&gt;으로 &lt;code class=&quot;highlighter-rouge&quot;&gt;import&lt;/code&gt;한 파일이 &lt;code class=&quot;highlighter-rouge&quot;&gt;Chunk File&lt;/code&gt;로 생성 됩니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;여기서 생각해 볼 점은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Lazy Loading&lt;/code&gt; 개수 만큼 &lt;code class=&quot;highlighter-rouge&quot;&gt;Chunk File&lt;/code&gt;이 생성된다는 것입니다.&lt;/p&gt;
+
+&lt;p&gt;만약, 같은 페이지에서 함게 사용해야 하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Lazy Loading&lt;/code&gt; 컴포넌트들이 있다면, 이 파일들은 &lt;code class=&quot;highlighter-rouge&quot;&gt;하나의 Chunk Group&lt;/code&gt;으로 만들면 좋을 것 같습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Webpack은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Chunk Name&lt;/code&gt;이 동일할 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;같은 Group&lt;/code&gt;으로 간주하고, &lt;code class=&quot;highlighter-rouge&quot;&gt;같은 Chunk File&lt;/code&gt;에 Build 합니다.&lt;/p&gt;
+
+&lt;p&gt;사용 방법은 간단합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Lazy Loading&lt;/code&gt;을 위한 &lt;code class=&quot;highlighter-rouge&quot;&gt;import&lt;/code&gt; 인자 앞에 &lt;code class=&quot;highlighter-rouge&quot;&gt;특수 주석&lt;/code&gt;을 작성하면 &lt;code class=&quot;highlighter-rouge&quot;&gt;ChunkName&lt;/code&gt;을 직접 작성할 수 있고, 같은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Chunk Name&lt;/code&gt;들을 &lt;code class=&quot;highlighter-rouge&quot;&gt;Group&lt;/code&gt;으로 빌드 합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;특수 주석: /&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; webpackChunkName: &lt;span class=&quot;s2&quot;&gt;&quot;chunk 명&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;/
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;const MyPage &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; import&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;/&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt; webpackChunkName: &lt;span class=&quot;s2&quot;&gt;&quot;my-chunk-group&quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;/ &lt;span class=&quot;s2&quot;&gt;&quot;@/views/MyPage.vue&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;공식문서: &lt;a href=&quot;https://router.vuejs.org/guide/advanced/lazy-loading.html#grouping-components-in-the-same-chunk&quot; target=&quot;_blank&quot;&gt;https://router.vuejs.org/guide/advanced/lazy-loading.html#grouping-components-in-the-same-chunk&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
+  Webpack 포스팅은 여러 절로 구성되어 있습니다.
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;./webpack-01&quot;&gt;
+      #01 Webpack의 &lt;span class=&quot;span-highlighter&quot;&gt;Chunk File Grouping&lt;/span&gt;
+    &lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;</content><author><name>초코비</name></author><category term="webpack" /><summary type="html">Webpack 빌드 시 생성되는 Chunk File의 Grouping에 대해 알아보겠습니다.</summary></entry><entry><title type="html">#02 vue.config.js의 runtimeCompiler 옵션</title><link href="http://localhost:4000/vue-02" rel="alternate" type="text/html" title="#02 vue.config.js의 &lt;span class='span-highlighter'&gt;runtimeCompiler&lt;/span&gt; 옵션" /><published>2021-05-30T18:00:00+09:00</published><updated>2021-05-30T18:00:00+09:00</updated><id>http://localhost:4000/vue-02</id><content type="html" xml:base="http://localhost:4000/vue-02">&lt;p&gt;Vue 프로젝트의 build 파일에 &lt;code class=&quot;highlighter-rouge&quot;&gt;compiler&lt;/code&gt;를 포함시키는 방법에 대해 알아보겠습니다.&lt;/p&gt;
 
 &lt;p&gt;Vue 프레임워크는 &lt;code class=&quot;highlighter-rouge&quot;&gt;SFC (Single File Component)&lt;/code&gt; 형식으로 컴포넌트를 만듭니다.&lt;/p&gt;
 
@@ -1231,44 +1277,4 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;hr /&gt;</content><author><name>초코비</name></author><category term="github page" /><summary type="html">Github Page는 Github에서 제공하는 정적 홈페이지 호스팅 서비스 입니다.</summary></entry><entry><title type="html">Typescript 02</title><link href="http://localhost:4000/typescript-02" rel="alternate" type="text/html" title="Typescript 02" /><published>2021-05-09T18:40:00+09:00</published><updated>2021-05-09T18:40:00+09:00</updated><id>http://localhost:4000/typescript-02</id><content type="html" xml:base="http://localhost:4000/typescript-02">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
-  Typescript 포스팅은 여러 절로 구성되어 있습니다.
-&lt;/span&gt;&lt;/p&gt;
-
-&lt;ul class=&quot;table-of-contents-list&quot;&gt;
-  &lt;li&gt;
-    &lt;a href=&quot;./typescript-01&quot;&gt;
-      #01 Typescript 개발환경 만들기
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./typescript-02&quot;&gt;
-      #02 Typescript 개발환경 만들기
-    &lt;/a&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;02-ts-개발환경-만들기&quot;&gt;#02 TS 개발환경 만들기&lt;/h2&gt;
-
-&lt;p&gt;두번째 포스팅 입니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;예제코드&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-typescript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-
-&lt;span class=&quot;nx&quot;&gt;console&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;감사합니다 🐫&lt;/p&gt;</content><author><name>초코비</name></author><category term="typescript" /><summary type="html">Typescript 포스팅은 여러 절로 구성되어 있습니다. #01 Typescript 개발환경 만들기 #02 Typescript 개발환경 만들기</summary></entry></feed>
+&lt;hr /&gt;</content><author><name>초코비</name></author><category term="github page" /><summary type="html">Github Page는 Github에서 제공하는 정적 홈페이지 호스팅 서비스 입니다.</summary></entry></feed>
