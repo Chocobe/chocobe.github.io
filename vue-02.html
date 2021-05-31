@@ -11,7 +11,7 @@
 
 
 
-    <title>Webpack First</title>
+    <title>#02 vue.config.js의 <span class='span-highlighter'>runtimeCompiler</span> 옵션</title>
     <meta name="HandheldFriendly" content="True" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Styles'n'Scripts -->
@@ -57,116 +57,30 @@
     <!-- This tag outputs SEO meta+structured data and other important settings -->
     <meta name="description" content="FrontEnd 기술 블로그 입니다" />
     <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
-    <link rel="canonical" href="http://localhost:4000/webpack-first" />
+    <link rel="canonical" href="http://localhost:4000/vue-02" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
      <!--title below is coming from _includes/dynamic_title-->
     <meta property="og:site_name" content="초코비 Front-End" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Webpack First" />
-    <meta property="og:description" content="
-  Webpack 포스팅은 여러 절로 구성되어 있습니다.
-
-
-
-  
-    
-      #01 Webpack 개발환경 만들기
-    
-  
-
-  
-    
-      #02 Webpack 개발환경 만들기
-    
-  
-
-
-#01&gt; Webpack 개발환경 만들기
-
-세번째 포스팅 입니다.
-
-
-  예제코드
-
-
-
-
-const path = require("path");
-
-module.exports = {
-  mode: "none",
-  entry: "app.js",
-  output: {
-    filename: "app.bundle.js",
-    path: path.resolve(__dirname, "dist")
-  }
-};
-
-
-
-
-감사합니다 🐫
-" />
-    <meta property="og:url" content="http://localhost:4000/webpack-first" />
-    <meta property="og:image" content="http://localhost:4000/assets/images/tagImage/bg_webpack.png" />
+    <meta property="og:title" content="#02 vue.config.js의 <span class='span-highlighter'>runtimeCompiler</span> 옵션" />
+    <meta property="og:description" content="Vue 프로젝트의 build 파일에 compiler를 포함시키는 방법에 대해 알아보겠습니다. Vue 프레임워크는 SFC (Single File Component) 형식으로 컴포넌트를 만듭니다. 그렇기 때문에, .js 파일 내에서 template 속성명으로 작성할 경우는 거의 없습니다. 만약, .js 파일에서 template 속성명으로 작성한 컴포넌트를 사용해야 할 경우, 다음과 같은 에러가 발생할 것입니다. 그럼 에러의 원인에 대해 알아보겠습니다. .js" />
+    <meta property="og:url" content="http://localhost:4000/vue-02" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/tagImage/bg_vue.png" />
     <meta property="article:publisher" content="https://www.facebook.com/" />
     <meta property="article:author" content="https://www.facebook.com/" />
-    <meta property="article:published_time" content="2021-05-09T00:31:00+09:00" />
-    <meta property="article:modified_time" content="2021-05-09T00:31:00+09:00" />
-    <meta property="article:tag" content="Webpack" />
+    <meta property="article:published_time" content="2021-05-30T18:00:00+09:00" />
+    <meta property="article:modified_time" content="2021-05-30T18:00:00+09:00" />
+    <meta property="article:tag" content="Vue" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Webpack First" />
-    <meta name="twitter:description" content="
-  Webpack 포스팅은 여러 절로 구성되어 있습니다.
-
-
-
-  
-    
-      #01 Webpack 개발환경 만들기
-    
-  
-
-  
-    
-      #02 Webpack 개발환경 만들기
-    
-  
-
-
-#01&gt; Webpack 개발환경 만들기
-
-세번째 포스팅 입니다.
-
-
-  예제코드
-
-
-
-
-const path = require("path");
-
-module.exports = {
-  mode: "none",
-  entry: "app.js",
-  output: {
-    filename: "app.bundle.js",
-    path: path.resolve(__dirname, "dist")
-  }
-};
-
-
-
-
-감사합니다 🐫
-" />
+    <meta name="twitter:title" content="#02 vue.config.js의 <span class='span-highlighter'>runtimeCompiler</span> 옵션" />
+    <meta name="twitter:description" content="Vue 프로젝트의 build 파일에 compiler를 포함시키는 방법에 대해 알아보겠습니다. Vue 프레임워크는 SFC (Single File Component) 형식으로 컴포넌트를 만듭니다. 그렇기 때문에, .js 파일 내에서 template 속성명으로 작성할 경우는 거의 없습니다. 만약, .js 파일에서 template 속성명으로 작성한 컴포넌트를 사용해야 할 경우, 다음과 같은 에러가 발생할 것입니다. 그럼 에러의 원인에 대해 알아보겠습니다. .js" />
     <meta name="twitter:url" content="http://localhost:4000/" />
-    <meta name="twitter:image" content="http://localhost:4000/assets/images/tagImage/bg_webpack.png" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/tagImage/bg_vue.png" />
     <meta name="twitter:label1" content="Written by" />
     <meta name="twitter:data1" content="초코비 Front-End" />
     <meta name="twitter:label2" content="Filed under" />
-    <meta name="twitter:data2" content="Webpack" />
+    <meta name="twitter:data2" content="Vue" />
     <meta name="twitter:site" content="@" />
     <meta name="twitter:creator" content="@" />
     <meta property="og:image:width" content="1400" />
@@ -181,61 +95,18 @@ module.exports = {
         "name": "초코비 Front-End",
         "logo": "http://localhost:4000/assets/images/logo/logo.svg"
     },
-    "url": "http://localhost:4000/webpack-first",
+    "url": "http://localhost:4000/vue-02",
     "image": {
         "@type": "ImageObject",
-        "url": "http://localhost:4000/assets/images/tagImage/bg_webpack.png",
+        "url": "http://localhost:4000/assets/images/tagImage/bg_vue.png",
         "width": 2000,
         "height": 666
     },
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "http://localhost:4000/webpack-first"
+        "@id": "http://localhost:4000/vue-02"
     },
-    "description": "
-  Webpack 포스팅은 여러 절로 구성되어 있습니다.
-
-
-
-  
-    
-      #01 Webpack 개발환경 만들기
-    
-  
-
-  
-    
-      #02 Webpack 개발환경 만들기
-    
-  
-
-
-#01&gt; Webpack 개발환경 만들기
-
-세번째 포스팅 입니다.
-
-
-  예제코드
-
-
-
-
-const path = require("path");
-
-module.exports = {
-  mode: "none",
-  entry: "app.js",
-  output: {
-    filename: "app.bundle.js",
-    path: path.resolve(__dirname, "dist")
-  }
-};
-
-
-
-
-감사합니다 🐫
-"
+    "description": "Vue 프로젝트의 build 파일에 compiler를 포함시키는 방법에 대해 알아보겠습니다. Vue 프레임워크는 SFC (Single File Component) 형식으로 컴포넌트를 만듭니다. 그렇기 때문에, .js 파일 내에서 template 속성명으로 작성할 경우는 거의 없습니다. 만약, .js 파일에서 template 속성명으로 작성한 컴포넌트를 사용해야 할 경우, 다음과 같은 에러가 발생할 것입니다. 그럼 에러의 원인에 대해 알아보겠습니다. .js"
 }
     </script>
 
@@ -248,7 +119,7 @@ module.exports = {
     </script> -->
 
     <meta name="generator" content="Jekyll 3.6.2" />
-    <link rel="alternate" type="application/rss+xml" title="Webpack First" href="/feed.xml" />
+    <link rel="alternate" type="application/rss+xml" title="#02 vue.config.js의 <span class='span-highlighter'>runtimeCompiler</span> 옵션" href="/feed.xml" />
 
 
 </head>
@@ -355,70 +226,146 @@ into the {body} of the default.hbs template -->
 <main id="site-main" class="site-main outer" role="main">
     <div class="inner">
 
-        <article class="post-full  tag-webpack post ">
+        <article class="post-full  tag-vue post ">
 
             <header class="post-full-header">
                 <section class="post-full-meta">
-                    <time class="post-full-meta-date" datetime=" 9 May 2021"> 9 May 2021</time>
+                    <time class="post-full-meta-date" datetime="30 May 2021">30 May 2021</time>
                     
                         <span class="date-divider">/</span>
                         
                             
-                               <a href='/tag/webpack/'>WEBPACK</a>
+                               <a href='/tag/vue/'>VUE</a>
                             
                         
                     
                 </section>
-                <h1 class="post-full-title">Webpack First</h1>
+                <h1 class="post-full-title">#02 vue.config.js의 <span class='span-highlighter'>runtimeCompiler</span> 옵션</h1>
             </header>
 
             
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p><span class="table-of-contents-list">
-  Webpack 포스팅은 여러 절로 구성되어 있습니다.
-</span></p>
+                    <p>Vue 프로젝트의 build 파일에 <code class="highlighter-rouge">compiler</code>를 포함시키는 방법에 대해 알아보겠습니다.</p>
 
-<ul class="table-of-contents-list">
-  <li>
-    <a href="./webpack-first">
-      #01 Webpack 개발환경 만들기
-    </a>
-  </li>
+<p>Vue 프레임워크는 <code class="highlighter-rouge">SFC (Single File Component)</code> 형식으로 컴포넌트를 만듭니다.</p>
 
-  <li>
-    <a href="./webpack-second">
-      #02 Webpack 개발환경 만들기
-    </a>
-  </li>
-</ul>
+<p>그렇기 때문에, <code class="highlighter-rouge">.js</code> 파일 내에서 <code class="highlighter-rouge">template</code> 속성명으로 작성할 경우는 거의 없습니다.</p>
 
-<h2 id="01-webpack-개발환경-만들기">#01&gt; Webpack 개발환경 만들기</h2>
+<p>만약, <code class="highlighter-rouge">.js</code> 파일에서 <code class="highlighter-rouge">template</code> 속성명으로 작성한 컴포넌트를 사용해야 할 경우, 다음과 같은 에러가 발생할 것입니다.</p>
 
-<p>세번째 포스팅 입니다.</p>
+<p><img src="assets/images/vue/02_vue/02_vue_01.png" class="shadow" alt="template 속성 사용 시 에러" /><br /></p>
+
+<p><br /></p>
+
+<p>그럼 에러의 원인에 대해 알아보겠습니다.</p>
+
+<p><code class="highlighter-rouge">.js</code> 파일에서 생성하는 <code class="highlighter-rouge">template</code>에 대한 예를 만들어 보겠습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// 경로: @/router/index.js</span>
+
+<span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="s2">"vue"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">VueRouter</span> <span class="k">from</span> <span class="s2">"vue-router"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">MyTemplate</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">resolve</span><span class="p">({</span>
+    <span class="na">template</span><span class="p">:</span> <span class="s2">`
+      &lt;div&gt;
+        Hello World
+      &lt;/div&gt;
+    `</span><span class="p">,</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">routes</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="na">path</span><span class="p">:</span> <span class="s2">"/"</span><span class="p">,</span>
+    <span class="na">component</span><span class="p">:</span> <span class="nx">MyTemplate</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">];</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">VueRouter</span><span class="p">({</span>
+  <span class="na">mode</span><span class="p">:</span> <span class="s2">"history"</span><span class="p">,</span>
+  <span class="nx">routes</span><span class="p">,</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>위 코드를 실행하면, 에러가 발생합니다.</p>
+
+<p>이유는 <code class="highlighter-rouge">build-only build</code> 상태이기 때문입니다.</p>
+
+<p><br /></p>
+
+<p>에러 메시지를 다시 확인해 보겠습니다.</p>
+
+<p><img src="assets/images/vue/02_vue/02_vue_02.png" class="shadow" alt="template 속성 사용 시 에러 확인" /><br /></p>
+
+<p><br /></p>
+
+<p>위 에러 메시지에서 밑줄친 부분이 핵심 입니다.</p>
 
 <blockquote>
-  <p>예제코드</p>
+  <p><code class="highlighter-rouge">template compiler</code> 를 사용할 수 없는 <span class="span-highlighter">runtime-only build</span>를 사용하고 있습니다.</p>
+
+  <p><code class="highlighter-rouge">compiler</code>가 포함된 build를 사용하세요</p>
 </blockquote>
 
 <p><br /></p>
 
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"path"</span><span class="p">);</span>
+<p>이러한 현상이 발생한 이유는 <code class="highlighter-rouge">Vue</code>의 기본 설정값이 <code class="highlighter-rouge">build</code> 파일에 <code class="highlighter-rouge">compiler</code>를 포함시키지 않기 때문입니다.</p>
+
+<p>안내하고 있는 방법인, <code class="highlighter-rouge">build</code> 파일에 <code class="highlighter-rouge">compiler</code>를 포함시키는 방법은 <code class="highlighter-rouge">vue.config.js</code>에 <code class="highlighter-rouge">runtimeCompiler: true</code>를 설정하면 됩니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// vue.config.js</span>
 
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">mode</span><span class="p">:</span> <span class="s2">"none"</span><span class="p">,</span>
-  <span class="na">entry</span><span class="p">:</span> <span class="s2">"app.js"</span><span class="p">,</span>
-  <span class="na">output</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">filename</span><span class="p">:</span> <span class="s2">"app.bundle.js"</span><span class="p">,</span>
-    <span class="na">path</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s2">"dist"</span><span class="p">)</span>
-  <span class="p">}</span>
+  <span class="na">runtimeCompiler</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
 <p><br /></p>
 
-<p>감사합니다 🐫</p>
+<p><code class="highlighter-rouge">runtimeCompiler</code>의 기본값은 <code class="highlighter-rouge">false</code>이기 때문에, <code class="highlighter-rouge">build</code> 파일에 <code class="highlighter-rouge">compiler</code>가 없으므로, <code class="highlighter-rouge">template</code> 속성을 <code class="highlighter-rouge">compile</code> 할 수 없었습니다.</p>
+
+<p><span class="span-highlighter">runtimeCompiler: true</span>를 사용하여, <code class="highlighter-rouge">build</code> 파일에 <code class="highlighter-rouge">compiler</code>를 포함시킨 상태이므로, 정상 동작을 확인할 수 있습니다.</p>
+
+<p><img src="assets/images/vue/02_vue/02_vue_03.png" class="shadow" alt="runtimeCompiler: true 적용" /><br /></p>
+
+<p><br /></p>
+
+<p>다만, <code class="highlighter-rouge">runtimeCompiler: true</code>를 사용할 경우, <code class="highlighter-rouge">build</code> 파일에 <code class="highlighter-rouge">compiler</code>가 포함 되므로, <code class="highlighter-rouge">build</code>파일이 <code class="highlighter-rouge">10kb</code> 정도 커지는 단점이 있습니다.</p>
+
+<p><br /></p>
+
+<blockquote>
+  <p>공식문서: <a href="https://cli.vuejs.org/config/#runtimecompiler" target="_blank">https://cli.vuejs.org/config/#runtimecompiler</a></p>
+</blockquote>
+
+<hr />
+
+<p><span class="table-of-contents-list">
+  Vue 포스팅은 여러 절로 구성되어 있습니다.
+</span></p>
+
+<ul class="table-of-contents-list">
+  <li>
+    <a href="./vue-01">
+      #01 <span class="span-highlighter">v-bind</span> 활용
+    </a>
+  </li>
+
+  <li>
+    <a href="./vue-02">
+      #02 vue.config.js의 <span class="span-highlighter">runtimeCompiler</span> 옵션
+    </a>
+  </li>
+</ul>
+
+<hr />
+
 
                 </div>
             </section>
@@ -477,7 +424,7 @@ into the {body} of the default.hbs template -->
                         <header class="read-next-card-header">
                             <small class="read-next-card-header-sitetitle">&mdash; 초코비 Front-End &mdash;</small>
                             
-                                <h3 class="read-next-card-header-title"><a href="/tag/webpack/">Webpack</a></h3>
+                                <h3 class="read-next-card-header-title"><a href="/tag/vue/">Vue</a></h3>
                             
                         </header>
                         <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
@@ -487,48 +434,48 @@ into the {body} of the default.hbs template -->
                                 
                                 
                                   
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
-                                  
-                                
+                                    
                                   
                                 
                                   
                                     
                                         
                                         
-                                            <li><a href="/webpack-second">Webpack Second</a></li>
+                                            <li><a href="/vue-01">#01 <span class='span-highlighter'>v-bind</span> 활용</a></li>
                                         
                                     
                                   
                                 
                                   
-                                    
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
                                   
                                 
                             </ul>
                         </div>
                         <footer class="read-next-card-footer">
-                            <a href="/tag/webpack/">
+                            <a href="/tag/vue/">
                                 
                                     See all 1 posts  →
                                 
@@ -540,26 +487,29 @@ into the {body} of the default.hbs template -->
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
             
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
                 
 
     <article class="post-card post-template">
         
-            <a class="post-card-image-link" href="/webpack-second">
-                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_webpack.png)"></div>
+            <a class="post-card-image-link" href="/vue-01">
+                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_vue.png)"></div>
             </a>
         
         <div class="post-card-content">
-            <a class="post-card-content-link" href="/webpack-second">
+            <a class="post-card-content-link" href="/vue-01">
                 <header class="post-card-header">
                     
                         
                             
-                                <span class="post-card-tags">Webpack</span>
+                                <span class="post-card-tags">Vue</span>
                             
                         
                     
 
-                    <h2 class="post-card-title">Webpack Second</h2>
+                    <h2 class="post-card-title">#01 <span class='span-highlighter'>v-bind</span> 활용</h2>
                 </header>
                 <section class="post-card-excerpt">
                     
@@ -590,9 +540,6 @@ into the {body} of the default.hbs template -->
 
             
 
-            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
-            
-
         </div>
     </div>
 </aside>
@@ -606,18 +553,18 @@ into the {body} of the default.hbs template -->
         </a>
     </div>
     <span class="floating-header-divider">&mdash;</span>
-    <div class="floating-header-title">Webpack First</div>
+    <div class="floating-header-title">#02 vue.config.js의 <span class='span-highlighter'>runtimeCompiler</span> 옵션</div>
     <div class="floating-header-share">
         <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
 </svg>
 </div>
-        <a class="floating-header-share-tw" href="https://twitter.com/share?text=Webpack+First&amp;url=https://chocobe.github.io/webpack-first"
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%2302+vue.config.js%EC%9D%98+%3Cspan+class%3D%27span-highlighter%27%3EruntimeCompiler%3C%2Fspan%3E+%EC%98%B5%EC%85%98&amp;url=https://chocobe.github.io/vue-02"
             onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
 
         </a>
-        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://chocobe.github.io/webpack-first"
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://chocobe.github.io/vue-02"
             onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
 

@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/author/chocobe/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2021-05-29T20:27:22+09:00</updated>
+  <updated>2021-05-31T14:02:12+09:00</updated>
   <id>http://localhost:4000/author/chocobe/feed.xml</id>
 
   
@@ -30,6 +30,157 @@
   
   
 
+  
+    <entry>
+      <title type="html">#02 vue.config.js의 runtimeCompiler 옵션</title>
+      <link href="http://localhost:4000/vue-02" rel="alternate" type="text/html" title="#02 vue.config.js의 &lt;span class='span-highlighter'&gt;runtimeCompiler&lt;/span&gt; 옵션" />
+      <published>2021-05-30T18:00:00+09:00</published>
+      <updated>2021-05-30T18:00:00+09:00</updated>
+      <id>http://localhost:4000/vue-02</id>
+      <content type="html" xml:base="http://localhost:4000/vue-02">&lt;p&gt;Vue 프로젝트의 build 파일에 &lt;code class=&quot;highlighter-rouge&quot;&gt;compiler&lt;/code&gt;를 포함시키는 방법에 대해 알아보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;Vue 프레임워크는 &lt;code class=&quot;highlighter-rouge&quot;&gt;SFC (Single File Component)&lt;/code&gt; 형식으로 컴포넌트를 만듭니다.&lt;/p&gt;
+
+&lt;p&gt;그렇기 때문에, &lt;code class=&quot;highlighter-rouge&quot;&gt;.js&lt;/code&gt; 파일 내에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;template&lt;/code&gt; 속성명으로 작성할 경우는 거의 없습니다.&lt;/p&gt;
+
+&lt;p&gt;만약, &lt;code class=&quot;highlighter-rouge&quot;&gt;.js&lt;/code&gt; 파일에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;template&lt;/code&gt; 속성명으로 작성한 컴포넌트를 사용해야 할 경우, 다음과 같은 에러가 발생할 것입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/vue/02_vue/02_vue_01.png&quot; class=&quot;shadow&quot; alt=&quot;template 속성 사용 시 에러&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;그럼 에러의 원인에 대해 알아보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;.js&lt;/code&gt; 파일에서 생성하는 &lt;code class=&quot;highlighter-rouge&quot;&gt;template&lt;/code&gt;에 대한 예를 만들어 보겠습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// 경로: @/router/index.js&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;Vue&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;vue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;VueRouter&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;vue-router&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyTemplate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;reject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;resolve&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;`
+      &amp;lt;div&amp;gt;
+        Hello World
+      &amp;lt;/div&amp;gt;
+    `&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;routes&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;/&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;component&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyTemplate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;router&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;VueRouter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;({&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;history&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;nx&quot;&gt;routes&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;위 코드를 실행하면, 에러가 발생합니다.&lt;/p&gt;
+
+&lt;p&gt;이유는 &lt;code class=&quot;highlighter-rouge&quot;&gt;build-only build&lt;/code&gt; 상태이기 때문입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;에러 메시지를 다시 확인해 보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/vue/02_vue/02_vue_02.png&quot; class=&quot;shadow&quot; alt=&quot;template 속성 사용 시 에러 확인&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;위 에러 메시지에서 밑줄친 부분이 핵심 입니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;template compiler&lt;/code&gt; 를 사용할 수 없는 &lt;span class=&quot;span-highlighter&quot;&gt;runtime-only build&lt;/span&gt;를 사용하고 있습니다.&lt;/p&gt;
+
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;compiler&lt;/code&gt;가 포함된 build를 사용하세요&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;이러한 현상이 발생한 이유는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Vue&lt;/code&gt;의 기본 설정값이 &lt;code class=&quot;highlighter-rouge&quot;&gt;build&lt;/code&gt; 파일에 &lt;code class=&quot;highlighter-rouge&quot;&gt;compiler&lt;/code&gt;를 포함시키지 않기 때문입니다.&lt;/p&gt;
+
+&lt;p&gt;안내하고 있는 방법인, &lt;code class=&quot;highlighter-rouge&quot;&gt;build&lt;/code&gt; 파일에 &lt;code class=&quot;highlighter-rouge&quot;&gt;compiler&lt;/code&gt;를 포함시키는 방법은 &lt;code class=&quot;highlighter-rouge&quot;&gt;vue.config.js&lt;/code&gt;에 &lt;code class=&quot;highlighter-rouge&quot;&gt;runtimeCompiler: true&lt;/code&gt;를 설정하면 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;// vue.config.js&lt;/span&gt;
+
+&lt;span class=&quot;nx&quot;&gt;module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;exports&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;runtimeCompiler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;runtimeCompiler&lt;/code&gt;의 기본값은 &lt;code class=&quot;highlighter-rouge&quot;&gt;false&lt;/code&gt;이기 때문에, &lt;code class=&quot;highlighter-rouge&quot;&gt;build&lt;/code&gt; 파일에 &lt;code class=&quot;highlighter-rouge&quot;&gt;compiler&lt;/code&gt;가 없으므로, &lt;code class=&quot;highlighter-rouge&quot;&gt;template&lt;/code&gt; 속성을 &lt;code class=&quot;highlighter-rouge&quot;&gt;compile&lt;/code&gt; 할 수 없었습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;span class=&quot;span-highlighter&quot;&gt;runtimeCompiler: true&lt;/span&gt;를 사용하여, &lt;code class=&quot;highlighter-rouge&quot;&gt;build&lt;/code&gt; 파일에 &lt;code class=&quot;highlighter-rouge&quot;&gt;compiler&lt;/code&gt;를 포함시킨 상태이므로, 정상 동작을 확인할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/vue/02_vue/02_vue_03.png&quot; class=&quot;shadow&quot; alt=&quot;runtimeCompiler: true 적용&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;다만, &lt;code class=&quot;highlighter-rouge&quot;&gt;runtimeCompiler: true&lt;/code&gt;를 사용할 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;build&lt;/code&gt; 파일에 &lt;code class=&quot;highlighter-rouge&quot;&gt;compiler&lt;/code&gt;가 포함 되므로, &lt;code class=&quot;highlighter-rouge&quot;&gt;build&lt;/code&gt;파일이 &lt;code class=&quot;highlighter-rouge&quot;&gt;10kb&lt;/code&gt; 정도 커지는 단점이 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;공식문서: &lt;a href=&quot;https://cli.vuejs.org/config/#runtimecompiler&quot; target=&quot;_blank&quot;&gt;https://cli.vuejs.org/config/#runtimecompiler&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
+  Vue 포스팅은 여러 절로 구성되어 있습니다.
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;./vue-01&quot;&gt;
+      #01 &lt;span class=&quot;span-highlighter&quot;&gt;v-bind&lt;/span&gt; 활용
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./vue-02&quot;&gt;
+      #02 vue.config.js의 &lt;span class=&quot;span-highlighter&quot;&gt;runtimeCompiler&lt;/span&gt; 옵션
+    &lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>초코비</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="vue" />
+      
+
+      
+        <summary type="html">Vue 프로젝트의 build 파일에 compiler를 포함시키는 방법에 대해 알아보겠습니다.</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">#01 v-bind 활용</title>
@@ -218,6 +369,12 @@
   &lt;li&gt;
     &lt;a href=&quot;./vue-01&quot;&gt;
       #01 &lt;span class=&quot;span-highlighter&quot;&gt;v-bind&lt;/span&gt; 활용
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./vue-02&quot;&gt;
+      #02 vue.config.js의 &lt;span class=&quot;span-highlighter&quot;&gt;runtimeCompiler&lt;/span&gt; 옵션
     &lt;/a&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -1481,83 +1638,6 @@
 
       
         <summary type="html">Typescript 포스팅은 여러 절로 구성되어 있습니다. #01 Typescript 개발환경 만들기 #02 Typescript 개발환경 만들기</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">Javascript Second</title>
-      <link href="http://localhost:4000/javascript-second" rel="alternate" type="text/html" title="Javascript Second" />
-      <published>2021-05-09T18:32:00+09:00</published>
-      <updated>2021-05-09T18:32:00+09:00</updated>
-      <id>http://localhost:4000/javascript-second</id>
-      <content type="html" xml:base="http://localhost:4000/javascript-second">&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
-  Javascript 포스팅은 여러 절로 구성되어 있습니다.
-&lt;/span&gt;&lt;/p&gt;
-
-&lt;ul class=&quot;table-of-contents-list&quot;&gt;
-  &lt;li&gt;
-    &lt;a href=&quot;./javascript-first&quot;&gt;
-      #01 Javascript 개발환경 만들기
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./javascript-second&quot;&gt;
-      #02 Javascript 개발환경 만들기
-    &lt;/a&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;02-javascript-개발환경-만들기&quot;&gt;#02 Javascript 개발환경 만들기&lt;/h2&gt;
-
-&lt;p&gt;첫번째 포스팅 입니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;예제코드&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;div class=&quot;language-javascript highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-
-&lt;span class=&quot;cm&quot;&gt;/**
- * @returns { number }
- * @param { number } a
- * @param { number } b
- */&lt;/span&gt;
-&lt;span class=&quot;kd&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;b&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;감사합니다 🐫&lt;/p&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>초코비</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="javascript" />
-      
-
-      
-        <summary type="html">Javascript 포스팅은 여러 절로 구성되어 있습니다. #01 Javascript 개발환경 만들기 #02 Javascript 개발환경 만들기</summary>
       
 
       
