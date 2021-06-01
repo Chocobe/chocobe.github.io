@@ -4,7 +4,7 @@
   <generator uri="https://jekyllrb.com/" version="3.7.4">Jekyll</generator>
   <link href="http://localhost:4000/author/chocobe/feed.xml" rel="self" type="application/atom+xml" />
   <link href="http://localhost:4000/" rel="alternate" type="text/html" />
-  <updated>2021-06-01T16:00:11+09:00</updated>
+  <updated>2021-06-02T01:56:36+09:00</updated>
   <id>http://localhost:4000/author/chocobe/feed.xml</id>
 
   
@@ -30,6 +30,370 @@
   
   
 
+  
+    <entry>
+      <title type="html">#04 Transparent Wrapper Pattern</title>
+      <link href="http://localhost:4000/vue-04" rel="alternate" type="text/html" title="#04 Transparent Wrapper Pattern" />
+      <published>2021-06-01T18:00:00+09:00</published>
+      <updated>2021-06-01T18:00:00+09:00</updated>
+      <id>http://localhost:4000/vue-04</id>
+      <content type="html" xml:base="http://localhost:4000/vue-04">&lt;h2 id=&quot;transparent-wrapper-pattern-이란&quot;&gt;Transparent Wrapper Pattern 이란?&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Transparent Wrapper Pattern&lt;/code&gt; 이란, &lt;code class=&quot;highlighter-rouge&quot;&gt;native element (기본요소)&lt;/code&gt;를 감싸는 방식의 컴포넌트 패턴을 말합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;기본 요소&lt;/code&gt;에 특정 스타일 또는 추가 기능이 재사용 되는 경우, 매번 구현하는 것은 노가다 요소가 되버립니다.&lt;/p&gt;
+
+&lt;p&gt;또한 매번 구현했다면, 스타일이나 기능 변경 시, 노가다의 지옥이 열립니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;위와같은 이유로 &lt;code class=&quot;highlighter-rouge&quot;&gt;기본 요소&lt;/code&gt;에 추가된 부분이 재사용 될 때, 
+&lt;span class=&quot;span-highlighter&quot;&gt;기본요소&lt;/span&gt; + &lt;span class=&quot;span-highlighter&quot;&gt;추가 부분&lt;/span&gt;을 
+하나로 묶는 컴포넌트를 만들어야 하며, 이러한 컴포넌트 패턴을 &lt;code class=&quot;highlighter-rouge&quot;&gt;Transparent Wrapper Pattern&lt;/code&gt; 이라고 합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Transparent Wrapper Pattern&lt;/code&gt;의 이름은 중요한 의미를 가지고 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;기본 요소&lt;/code&gt;의 원래 기능은 &lt;code class=&quot;highlighter-rouge&quot;&gt;원본 그대로&lt;/code&gt; 사용할 수 있어야 한다는 것입니다.&lt;/p&gt;
+
+&lt;p&gt;즉, &lt;code class=&quot;highlighter-rouge&quot;&gt;기본 요소&lt;/code&gt;의 원래 기능은 그대로 사용 가능한 상태에서, &lt;code class=&quot;highlighter-rouge&quot;&gt;추가 부분&lt;/code&gt;이 더해진 컴포넌트를 의미 합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;이하 사용할 용어를 정의하겠습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;기본 컴포넌트&lt;/code&gt;: 기본 요소&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;래퍼 컴포넌트&lt;/code&gt;: Transparent Wrapper Component&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;먼저 &lt;code class=&quot;highlighter-rouge&quot;&gt;기본 컴포넌트&lt;/code&gt;에서 지원할 수 있는 기능의 종류를 살펴보겠습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Props&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Event Listener&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Slot&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;위 항목들을 &lt;code class=&quot;highlighter-rouge&quot;&gt;래퍼 컴포넌트&lt;/code&gt;에서 재정의 하기위해 반복 코딩을 한다면, 이것 또한 문제가 됩니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Vue&lt;/code&gt;는 이러한 상황에 사용할 수 있는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Vue Instance Property&lt;/code&gt;를 제공하고 있습니다.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vm.$attrs&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vm.$listeners&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vm.$scopedSlots&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;이러한 &lt;code class=&quot;highlighter-rouge&quot;&gt;Vue Instance Property&lt;/code&gt;를 사용하면, 중복 코딩 없이 &lt;code class=&quot;highlighter-rouge&quot;&gt;래퍼 컴포넌트&lt;/code&gt;를 구현할 수 있습니다.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;vue-instance-property&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Vue Instance Property&lt;/code&gt;&lt;/h2&gt;
+
+&lt;h3 id=&quot;vmattrs&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vm.$attrs&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vm.$attrs&lt;/code&gt;는 부모로 부터 전달받은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Props&lt;/code&gt; 중, 컴포넌트 자신의 내부에 정의하지 않은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Props&lt;/code&gt;가 담기는 객체 입니다.&lt;/p&gt;
+
+&lt;p&gt;다시말해, 컴포넌트 자신의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Props&lt;/code&gt;는 그대로 바인딩 되고, 바인딩 되지 못한 &lt;code class=&quot;highlighter-rouge&quot;&gt;Props&lt;/code&gt;들을 모아둔 객체 입니다.&lt;/p&gt;
+
+&lt;p&gt;이를 &lt;code class=&quot;highlighter-rouge&quot;&gt;래퍼 컴포넌트&lt;/code&gt; 입장에서 본다면, &lt;code class=&quot;highlighter-rouge&quot;&gt;래퍼 컴포넌트&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;$attrs&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;기본 컴포넌트&lt;/code&gt;에 바인딩 시켜므로써, 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;기본 컴포넌트&lt;/code&gt;의 기존 &lt;code class=&quot;highlighter-rouge&quot;&gt;Props&lt;/code&gt;는 그대로 지원하게 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-vue highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;&amp;lt;!-- 래퍼 컴포넌트 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;기본컴포넌트&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-bind=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$attrs&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;기본컴포넌트&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;위의 코드는 우리가 의도했던 대로 동작되지는 않습니다.&lt;/p&gt;
+
+&lt;p&gt;이유는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Vue Instance&lt;/code&gt;의 기본 설정에 의해, 컴포넌트 자신에게 정의되지 않은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Props&lt;/code&gt;는 자신의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Root Element&lt;/code&gt;에 바인딩 시키기 때문입니다.&lt;/p&gt;
+
+&lt;p&gt;이 상태에서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Root Element&lt;/code&gt;에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Props&lt;/code&gt;가 바인딩 되기 때문에, &lt;code class=&quot;highlighter-rouge&quot;&gt;$attrs&lt;/code&gt;에는 빈 객체가 되버리므로, 의도한 대로 동작되지 않는 것입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Vue Property&lt;/code&gt; 중 &lt;span class=&quot;span-highlighter&quot;&gt;inheritAttrs&lt;/span&gt; 속성의 기본값이 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;인데, 이 속성이 &lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;라면 &lt;code class=&quot;highlighter-rouge&quot;&gt;vm.$attrs&lt;/code&gt;를
+컴포넌트 자신의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Root Element&lt;/code&gt;에 바인딩 시킵니다.&lt;/p&gt;
+
+&lt;p&gt;따라서, &lt;code class=&quot;highlighter-rouge&quot;&gt;inheritAttrs: false&lt;/code&gt;로 설정하여 &lt;code class=&quot;highlighter-rouge&quot;&gt;기본 컴포넌트&lt;/code&gt;에 &lt;code class=&quot;highlighter-rouge&quot;&gt;Props&lt;/code&gt;를 전달할 수 있습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-vue highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;기본컴포넌트&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-bind=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$attrs&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;기본컴포넌트&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;기본컴포넌트&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;...&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;inheritAttrs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;vmlisteners&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vm.$listeners&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;vm.$listeners&lt;/code&gt;는 전달받은 모든 &lt;code class=&quot;highlighter-rouge&quot;&gt;Event Listener&lt;/code&gt;가 담기는 객체 입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;래퍼 컴포넌트&lt;/code&gt;에서 추가된 &lt;code class=&quot;highlighter-rouge&quot;&gt;Event&lt;/code&gt;가 있다면, 해당 &lt;code class=&quot;highlighter-rouge&quot;&gt;Event Emiter Method&lt;/code&gt;를 만들고, 
+&lt;code class=&quot;highlighter-rouge&quot;&gt;$listeners&lt;/code&gt; 객체는 &lt;code class=&quot;highlighter-rouge&quot;&gt;기본 컴포넌트&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;v-on&lt;/code&gt; 디렉티브를 사용하여 그대로 전달해 주면 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-vue highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;기본컴포넌트&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-on=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$listeners&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;기본컴포넌트&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;slot&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Slot&lt;/code&gt;&lt;/h2&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;기본 컴포넌트&lt;/code&gt;의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Slot&lt;/code&gt; 기능도 &lt;code class=&quot;highlighter-rouge&quot;&gt;래퍼 컴포넌트&lt;/code&gt;에서 그대로 지원해줘야 합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;래퍼 컴포넌트&lt;/code&gt;에서의 &lt;code class=&quot;highlighter-rouge&quot;&gt;Slot&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;기본 컴포넌트 바디&lt;/code&gt;에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;$scopedSlots&lt;/code&gt;를 사용하여 반복문으로 구현할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;구현방식은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Dynamic Slot Names&lt;/code&gt;와 &lt;code class=&quot;highlighter-rouge&quot;&gt;Slot Props&lt;/code&gt;를 사용 합니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-vue highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;기본컴포넌트&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;template&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-for=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;(_, name) in $scopedSlots&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-slot:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;]=&quot;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;slotProps&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;slot&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;:name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-bind=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;slotProps&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/slot&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;기본컴포넌트&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/template&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;지금까지의 처리를 &lt;code class=&quot;highlighter-rouge&quot;&gt;래퍼 컴포넌트&lt;/code&gt;에 구현하면, &lt;code class=&quot;highlighter-rouge&quot;&gt;기본 컴포넌트&lt;/code&gt;의 원래 기능을 모두 지원하며, &lt;code class=&quot;highlighter-rouge&quot;&gt;래퍼 컴포넌트&lt;/code&gt;에서 추가한 기능 또는 스타일도 지원하는
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Transparent Wrapper Component&lt;/code&gt;가 완성 됩니다.&lt;/p&gt;
+
+&lt;p&gt;아래 코드는 이번 포스팅의 모든 내용을 담은 예시 입니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;경로: “@/components/myComp/MyInput.vue”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-vue highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- header Slot --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;slot&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;header&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-bind=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;headerData&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;｛｛ headerData.val1 ｝｝&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;｛｛ headerData.val2 ｝｝&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/slot&amp;gt;&lt;/span&gt;
+    
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;input&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;text&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;:value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;value&quot;&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;input=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;emitInput&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- default Slot --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;slot&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-bind=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;defaultData&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;｛｛ defaultData.val1 ｝｝&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;｛｛ defaultData.val2 ｝｝&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/slot&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- footer Slot --&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;slot&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;footer&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-bind=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;footerData&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;｛｛ footerData.val1 ｝｝&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;｛｛ footerData.val2 ｝｝&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/slot&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;props&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;type&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;default&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+
+  &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;headerData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;val1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;헤더 데이터 1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;val2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;헤더 데이터 2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+
+      &lt;span class=&quot;na&quot;&gt;defaultData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;val1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;디폴트 데이터 1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;val2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;디폴트 데이터 2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+
+      &lt;span class=&quot;na&quot;&gt;footerData&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;val1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;푸터 데이터 1&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+        &lt;span class=&quot;na&quot;&gt;val2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;푸터 데이터 2&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+
+  &lt;span class=&quot;na&quot;&gt;methods&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;emitInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;kd&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;$emit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;input&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;value&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;경로: “@/components/myComp/MyInputWrapper.vue”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-vue highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h3&amp;gt;&lt;/span&gt;래퍼 컴포넌트&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h3&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;MyInput&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-bind=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$attrs&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-on=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;$listeners&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;template&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-for=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;(_, name) in $scopedSlots&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-slot:&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;]=&quot;&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;slotProps&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;slot&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;:name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;name&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-bind=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;slotProps&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/slot&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/MyInput&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/template&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyInput&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@/components/myComp/MyInput.vue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;inheritAttrs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+
+  &lt;span class=&quot;na&quot;&gt;components&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;MyInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;style&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;scoped&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nc&quot;&gt;.myInputWrapper&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;20px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;nl&quot;&gt;border&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;5px&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;solid&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;#e25c00&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;style&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;경로: “@/views/MyTestPage.vue”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;div class=&quot;language-vue highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;div&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;MyInput&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-model=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;value_1&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&amp;lt;/MyInput&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;hr/&amp;gt;&lt;/span&gt;
+
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;MyInputWrapper&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-model=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;value_2&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;template&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-slot:header=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;headerProps&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;헤더 데이터: ｛｛ headerProps ｝｝&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;v-slot=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;defaultProps&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;기본 데이터: ｛｛ defaultProps ｝｝&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+      &lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;template&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;/MyInputWrapper&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/div&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/template&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyInput&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@/component/myComp/MyInput.vue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;MyInputWrapper&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;from&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;@/components/myComp/MyInputWrapper.vue&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;export&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;default&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;na&quot;&gt;components&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;MyInput&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;nx&quot;&gt;MyInputWrapper&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+
+  &lt;span class=&quot;na&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;value_1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hello&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+      &lt;span class=&quot;na&quot;&gt;value_2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;World&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;h3&amp;gt;&lt;/code&gt; 와 &lt;code class=&quot;highlighter-rouge&quot;&gt;스타일&lt;/code&gt;이 추가된 &lt;code class=&quot;highlighter-rouge&quot;&gt;기본 컴포넌트&lt;/code&gt;를 &lt;code class=&quot;highlighter-rouge&quot;&gt;래퍼 컴포넌트&lt;/code&gt;를 만들어 재사용할 수 있게 되었습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/vue/04_vue/04_vue_01.png&quot; class=&quot;shadow&quot; alt=&quot;Transparent Wrapper Pattern&quot; /&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;참고자료: &lt;a href=&quot;https://zendev.com/2018/05/31/transparent-wrapper-components-in-vue.html&quot; target=&quot;_blank&quot;&gt;https://zendev.com/2018/05/31/transparent-wrapper-components-in-vue.html&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
+  Vue 포스팅은 여러 절로 구성되어 있습니다.
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;./vue-01&quot;&gt;
+      #01 &lt;span class=&quot;span-highlighter&quot;&gt;v-bind&lt;/span&gt; 활용
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./vue-02&quot;&gt;
+      #02 vue.config.js의 &lt;span class=&quot;span-highlighter&quot;&gt;runtimeCompiler&lt;/span&gt; 옵션
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./vue-03&quot;&gt;
+      #03 유효성 검사 3rd 라이브러리: vee-validate
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./vue-04&quot;&gt;
+      #04 Transparent Wrapper Pattern
+    &lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>초코비</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="vue" />
+      
+
+      
+        <summary type="html">Transparent Wrapper Pattern 이란?</summary>
+      
+
+      
+      
+    </entry>
   
     <entry>
       <title type="html">#03 유효성 검사 3rd 라이브러리: vee-validate</title>
@@ -817,6 +1181,12 @@
       #03 유효성 검사 3rd 라이브러리: vee-validate
     &lt;/a&gt;
   &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./vue-04&quot;&gt;
+      #04 Transparent Wrapper Pattern
+    &lt;/a&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;</content>
@@ -1054,6 +1424,12 @@
       #03 유효성 검사 3rd 라이브러리: vee-validate
     &lt;/a&gt;
   &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./vue-04&quot;&gt;
+      #04 Transparent Wrapper Pattern
+    &lt;/a&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;</content>
@@ -1283,6 +1659,12 @@
   &lt;li&gt;
     &lt;a href=&quot;./vue-03&quot;&gt;
       #03 유효성 검사 3rd 라이브러리: vee-validate
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./vue-04&quot;&gt;
+      #04 Transparent Wrapper Pattern
     &lt;/a&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -1596,142 +1978,6 @@
     </entry>
   
     <entry>
-      <title type="html">#05 태그 설정 (tags.yml)</title>
-      <link href="http://localhost:4000/github-page-05" rel="alternate" type="text/html" title="#05 태그 설정 (tags.yml)" />
-      <published>2021-05-11T22:00:00+09:00</published>
-      <updated>2021-05-11T22:00:00+09:00</updated>
-      <id>http://localhost:4000/github-page-05</id>
-      <content type="html" xml:base="http://localhost:4000/github-page-05">&lt;p&gt;이번 포스팅에서는 게시글에 사용할 &lt;span class=&quot;span-highlighter&quot;&gt;태그(tag)&lt;/span&gt;를 작성해 보겠습니다.&lt;/p&gt;
-
-&lt;p&gt;태그는 다양한 게시글을 주제별로 식별하기 위해 사용합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jasper2&lt;/code&gt;에서 태그도 같은 역할을 하게되며, 메인 메뉴에서 활용하게 됩니다.&lt;/p&gt;
-
-&lt;p&gt;먼저 태그 설정파일인 &lt;span class=&quot;span-highlighter&quot;&gt;tags.yml&lt;/span&gt;파일을 살펴 보겠습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;경로: 루트/_data/tags.yml
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/05_githubPage/05_githubPage_01.png&quot; class=&quot;shadow&quot; alt=&quot;tags.yml 파일&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tags.yml&lt;/code&gt; 파일의 구성은 다음과 같습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;태그변수명&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;태그명&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;태그 설명&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;cover&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;태그의 배너 이미지&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tags.yml&lt;/code&gt;의 기존 내용을 모두 지우고, &lt;code class=&quot;highlighter-rouge&quot;&gt;test tag&lt;/code&gt; 라는 태그를 만들어 보겠습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;test-tag&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;test-tag&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;테스트용 태그 입니다&lt;/span&gt;
-    &lt;span class=&quot;na&quot;&gt;cover&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;새로만든 태그가 동작하는지 확인하기 위해, &lt;code class=&quot;highlighter-rouge&quot;&gt;2017-07-27-welcome.md&lt;/code&gt; 글의 태그를 수정해 보겠습니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;경로: 루트/_posts/2017-07-27-welcome.md
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;2017-07-27-welcome.md&lt;/code&gt; 파일 설정부분 중 &lt;code class=&quot;highlighter-rouge&quot;&gt;tag&lt;/code&gt; 부분을 &lt;code class=&quot;highlighter-rouge&quot;&gt;test tag&lt;/code&gt; 로 변경해 줍니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/05_githubPage/05_githubPage_02.png&quot; class=&quot;shadow&quot; alt=&quot;tag 변경&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;이제 태그 생성과 적용이 완료 되었습니다.&lt;/p&gt;
-
-&lt;p&gt;마지막으로 적용된 태그를 확인하기 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;로컬서버&lt;/code&gt;를 실행 시키면 다음과 같은 결과를 볼 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/05_githubPage/05_githubPage_03.png&quot; class=&quot;shadow&quot; alt=&quot;tag 변경 결과 1&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/05_githubPage/05_githubPage_04.png&quot; class=&quot;shadow&quot; alt=&quot;tag 변경 결과 2&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;참고자료: &lt;a href=&quot;https://moon9342.github.io/jekyll-start&quot; target=&quot;_blank&quot;&gt;https://moon9342.github.io/jekyll-start&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
-  Github Page 전체 목차 입니다.
-&lt;/span&gt;&lt;/p&gt;
-
-&lt;ul class=&quot;table-of-contents-list&quot;&gt;
-  &lt;li&gt;
-    &lt;a href=&quot;./github-page-01&quot;&gt;
-      #01 Github Page 포스팅 개요
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./github-page-02&quot;&gt;
-      #02 Github Page를 위한 Jekyll 환경구축
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./github-page-03&quot;&gt;
-      #03 사이트 설정 (_config.yml)
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./github-page-04&quot;&gt;
-      #04 작성자(저자) 설정 (authors.yml)
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./github-page-05&quot;&gt;
-      #05 태그 설정 (tags.yml)
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./github-page-06&quot;&gt;
-      #06 메뉴 설정 (navigation.html)
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./github-page-07&quot;&gt;
-      #07 게시글 작성하기
-    &lt;/a&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>초코비</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="github page" />
-      
-
-      
-        <summary type="html">이번 포스팅에서는 게시글에 사용할 태그(tag)를 작성해 보겠습니다.</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
       <title type="html">#04 작성자(저자) 설정 (authors.yml)</title>
       <link href="http://localhost:4000/github-page-04" rel="alternate" type="text/html" title="#04 작성자(저자) 설정 (authors.yml)" />
       <published>2021-05-11T22:00:00+09:00</published>
@@ -1890,6 +2136,142 @@
 
       
         <summary type="html">이번 포스트에서는 작성한 글의 작성자(저자) 설정을 위해, authors.yml 파일을 수정해 보겠습니다.</summary>
+      
+
+      
+      
+    </entry>
+  
+    <entry>
+      <title type="html">#05 태그 설정 (tags.yml)</title>
+      <link href="http://localhost:4000/github-page-05" rel="alternate" type="text/html" title="#05 태그 설정 (tags.yml)" />
+      <published>2021-05-11T22:00:00+09:00</published>
+      <updated>2021-05-11T22:00:00+09:00</updated>
+      <id>http://localhost:4000/github-page-05</id>
+      <content type="html" xml:base="http://localhost:4000/github-page-05">&lt;p&gt;이번 포스팅에서는 게시글에 사용할 &lt;span class=&quot;span-highlighter&quot;&gt;태그(tag)&lt;/span&gt;를 작성해 보겠습니다.&lt;/p&gt;
+
+&lt;p&gt;태그는 다양한 게시글을 주제별로 식별하기 위해 사용합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jasper2&lt;/code&gt;에서 태그도 같은 역할을 하게되며, 메인 메뉴에서 활용하게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;먼저 태그 설정파일인 &lt;span class=&quot;span-highlighter&quot;&gt;tags.yml&lt;/span&gt;파일을 살펴 보겠습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;경로: 루트/_data/tags.yml
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/05_githubPage/05_githubPage_01.png&quot; class=&quot;shadow&quot; alt=&quot;tags.yml 파일&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tags.yml&lt;/code&gt; 파일의 구성은 다음과 같습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;s&quot;&gt;태그변수명&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;태그명&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;태그 설명&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;cover&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;태그의 배너 이미지&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tags.yml&lt;/code&gt;의 기존 내용을 모두 지우고, &lt;code class=&quot;highlighter-rouge&quot;&gt;test tag&lt;/code&gt; 라는 태그를 만들어 보겠습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-yaml highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;na&quot;&gt;test-tag&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;test-tag&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;description&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;테스트용 태그 입니다&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;cover&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;#&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;새로만든 태그가 동작하는지 확인하기 위해, &lt;code class=&quot;highlighter-rouge&quot;&gt;2017-07-27-welcome.md&lt;/code&gt; 글의 태그를 수정해 보겠습니다.&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;경로: 루트/_posts/2017-07-27-welcome.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;2017-07-27-welcome.md&lt;/code&gt; 파일 설정부분 중 &lt;code class=&quot;highlighter-rouge&quot;&gt;tag&lt;/code&gt; 부분을 &lt;code class=&quot;highlighter-rouge&quot;&gt;test tag&lt;/code&gt; 로 변경해 줍니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/05_githubPage/05_githubPage_02.png&quot; class=&quot;shadow&quot; alt=&quot;tag 변경&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;이제 태그 생성과 적용이 완료 되었습니다.&lt;/p&gt;
+
+&lt;p&gt;마지막으로 적용된 태그를 확인하기 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;로컬서버&lt;/code&gt;를 실행 시키면 다음과 같은 결과를 볼 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/05_githubPage/05_githubPage_03.png&quot; class=&quot;shadow&quot; alt=&quot;tag 변경 결과 1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/05_githubPage/05_githubPage_04.png&quot; class=&quot;shadow&quot; alt=&quot;tag 변경 결과 2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;참고자료: &lt;a href=&quot;https://moon9342.github.io/jekyll-start&quot; target=&quot;_blank&quot;&gt;https://moon9342.github.io/jekyll-start&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
+  Github Page 전체 목차 입니다.
+&lt;/span&gt;&lt;/p&gt;
+
+&lt;ul class=&quot;table-of-contents-list&quot;&gt;
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-01&quot;&gt;
+      #01 Github Page 포스팅 개요
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-02&quot;&gt;
+      #02 Github Page를 위한 Jekyll 환경구축
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-03&quot;&gt;
+      #03 사이트 설정 (_config.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-04&quot;&gt;
+      #04 작성자(저자) 설정 (authors.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-05&quot;&gt;
+      #05 태그 설정 (tags.yml)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-06&quot;&gt;
+      #06 메뉴 설정 (navigation.html)
+    &lt;/a&gt;
+  &lt;/li&gt;
+
+  &lt;li&gt;
+    &lt;a href=&quot;./github-page-07&quot;&gt;
+      #07 게시글 작성하기
+    &lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;</content>
+
+      
+      
+      
+      
+      
+
+      <author>
+          <name>초코비</name>
+        
+        
+      </author>
+
+      
+
+      
+        <category term="github page" />
+      
+
+      
+        <summary type="html">이번 포스팅에서는 게시글에 사용할 태그(tag)를 작성해 보겠습니다.</summary>
       
 
       
@@ -2128,214 +2510,6 @@
 
       
         <summary type="html">지난 포스팅을 통해서 우리는 로컬서버에서 동작하는 홈페이지를 갖게 되었습니다.</summary>
-      
-
-      
-      
-    </entry>
-  
-    <entry>
-      <title type="html">#02 Github Page를 위한 Jekyll 환경구축</title>
-      <link href="http://localhost:4000/github-page-02" rel="alternate" type="text/html" title="#02 Github Page를 위한 Jekyll 환경구축" />
-      <published>2021-05-10T19:00:00+09:00</published>
-      <updated>2021-05-10T19:00:00+09:00</updated>
-      <id>http://localhost:4000/github-page-02</id>
-      <content type="html" xml:base="http://localhost:4000/github-page-02">&lt;p&gt;Github Page 구축을 편하게 하기 위한 &lt;span class=&quot;span-highlighter&quot;&gt;정적 홈페이지 생성기&lt;/span&gt;인 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt;을 설치해 보겠습니다.&lt;/p&gt;
-
-&lt;p&gt;우리가 만들고 운영할 블로그는 &lt;span class=&quot;span-highlighter&quot;&gt;정보공유&lt;/span&gt;와 &lt;span class=&quot;span-highlighter&quot;&gt;기록&lt;/span&gt;을 목적으로 하므로 디자인이 중요치 않다(😱)고 생각할 수도 있습니다.&lt;/p&gt;
-
-&lt;p&gt;하지만 매일 보고, 만들고, 관리할 내 블로그가 보기 불편하게 만들어 졌다면, 볼때마다 스트레스가 될 것 같습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;우리가 사용할 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt; 은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Theme&lt;/code&gt; 라는 무료 템플릿을 사용할 수 있습니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Jekyll Theme &lt;a href=&quot;http://jekyllthemes.org/&quot; target=&quot;_blank&quot;&gt;http://jekyllthemes.org/&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;레이아웃, 디자인을 템플릿으로 사용할 수 있고, 우리는 설정과 수정만으로 블로그를 만들 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;이러한 이유로 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt;을 사용하는 것이고, 다음과 같은 요소를 설치해 보겠습니다.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Ruby&lt;/code&gt; 설치&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bundler&lt;/code&gt; 설치&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll Theme&lt;/code&gt; 다운로드 - &lt;span class=&quot;span-highlighter&quot;&gt;Jasper2&lt;/span&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gem&lt;/code&gt; 설치&lt;/li&gt;
-  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;로컬서버&lt;/code&gt; 실행&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;01-ruby-다운로드-및-설치&quot;&gt;01) &lt;code class=&quot;highlighter-rouge&quot;&gt;Ruby&lt;/code&gt; 다운로드 및 설치&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ruby&lt;/code&gt;로 만들어 졌기 때문에, 우리가 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt; 을 로컬에서 사용하기 위해서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ruby&lt;/code&gt;를 설치해야 합니다.&lt;/p&gt;
-
-&lt;p&gt;먼저 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ruby&lt;/code&gt; 공식 홈페이지에서 OS에 맞는 설치파일을 다운로드 받고 설치 합니다.&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;다운로드 링크 &lt;a href=&quot;https://rubyinstaller.org/downloads/&quot; target=&quot;_blank&quot;&gt;https://rubyinstaller.org/downloads/&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/02_githubPage/02_githubPage_01.png&quot; class=&quot;shadow&quot; alt=&quot;루비 다운로드 페이지&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;02-bundler-설치&quot;&gt;02) &lt;code class=&quot;highlighter-rouge&quot;&gt;bundler&lt;/code&gt; 설치&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Ruby&lt;/code&gt; 에서는 라이브러리 또는 페키지를 &lt;span class=&quot;span-highlighter&quot;&gt;gem&lt;/span&gt; 이라고 부릅니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll Theme&lt;/code&gt;을 빌드하기 위한 도구로 &lt;code class=&quot;highlighter-rouge&quot;&gt;bundler&lt;/code&gt; 가 필요하며, &lt;code class=&quot;highlighter-rouge&quot;&gt;터미널(cmd)&lt;/code&gt; 로 설치할 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;bundler&lt;/code&gt; 설치를 위해 &lt;code class=&quot;highlighter-rouge&quot;&gt;터미널(cmd)&lt;/code&gt; 에 다음 명령어를 실행 시킵니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install bundler
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;03-jekyll-theme-다운로드---jasper2&quot;&gt;03) &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll Theme&lt;/code&gt; 다운로드 - &lt;span class=&quot;span-highlighter&quot;&gt;Jasper2&lt;/span&gt;&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll Theme&lt;/code&gt; 들은 설정이 모두 다릅니다.&lt;/p&gt;
-
-&lt;p&gt;홈페이지 구축까지 시도해본 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll Theme&lt;/code&gt;는 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jasper2&lt;/code&gt; 뿐이므로, &lt;span class=&quot;span-highlighter&quot;&gt;Jasper2&lt;/span&gt;를 다운로드 받겠습니다.&lt;/p&gt;
-
-&lt;p&gt;Google에서 &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll jasper2&lt;/code&gt;를 검색하면, 다운로드 페이지를 찾을 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/02_githubPage/02_githubPage_02.png&quot; class=&quot;shadow&quot; alt=&quot;Jekyll Theme 다운로드 페이지&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;다운로드한 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll Theme&lt;/code&gt;가 우리의 블로그가 됩니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;04-gem-설치&quot;&gt;04) &lt;code class=&quot;highlighter-rouge&quot;&gt;gem&lt;/code&gt; 설치&lt;/h3&gt;
-
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll&lt;/code&gt;은 &lt;code class=&quot;highlighter-rouge&quot;&gt;Ruby&lt;/code&gt;로 만들어졌기 때문에, 의존성 파일도 &lt;code class=&quot;highlighter-rouge&quot;&gt;gem&lt;/code&gt; 으로 구성되어 있습니다.&lt;/p&gt;
-
-&lt;p&gt;원하는 IDE를 사용하여 다운로드한 &lt;code class=&quot;highlighter-rouge&quot;&gt;Jekyll Theme&lt;/code&gt;를 엽니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/02_githubPage/02_githubPage_03.png&quot; class=&quot;shadow&quot; alt=&quot;Jekyll Theme 프로젝트 열기&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;프로젝트가 열리면, &lt;code class=&quot;highlighter-rouge&quot;&gt;터미널&lt;/code&gt;을 열고 다음 명령을 실행하여, &lt;code class=&quot;highlighter-rouge&quot;&gt;gem&lt;/code&gt;을 설치 합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle install
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/02_githubPage/02_githubPage_04.png&quot; class=&quot;shadow&quot; alt=&quot;gem 설치&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;설치가 완료 되었다면, 다음과 같은 메시지를 볼 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/02_githubPage/02_githubPage_05.png&quot; class=&quot;shadow&quot; alt=&quot;gem 설치결과&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;05-로컬서버-실행&quot;&gt;05) &lt;code class=&quot;highlighter-rouge&quot;&gt;로컬서버&lt;/code&gt; 실행&lt;/h3&gt;
-
-&lt;p&gt;이제 우리의 프로젝트를 실행할 준비가 완료 되었습니다.&lt;/p&gt;
-
-&lt;p&gt;터미널에 다음 명령으로 로컬서버를 실행 합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll s
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;기본 port는 &lt;code class=&quot;highlighter-rouge&quot;&gt;4000&lt;/code&gt;번 이며, 변경할 경우, &lt;code class=&quot;highlighter-rouge&quot;&gt;--port 번호&lt;/code&gt; 옵션을 설정하여 실행 합니다.&lt;/p&gt;
-
-&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll s &lt;span class=&quot;nt&quot;&gt;--port&lt;/span&gt; 8080
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
-
-&lt;p&gt;로컬서버를 실행하면, 우리의 블로그를 볼 수 있습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;assets/images/githubPage/02_githubPage/02_githubPage_06.png&quot; class=&quot;shadow&quot; alt=&quot;로컬서버 실행결과&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;이로써 우리의 블로그가 만들어 졌습니다.&lt;/p&gt;
-
-&lt;p&gt;다음 포스팅 부터는 블로그의 &lt;code class=&quot;highlighter-rouge&quot;&gt;세부설정&lt;/code&gt;에 대해 알아보겠습니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;참고자료: &lt;a href=&quot;https://moon9342.github.io/jekyll-start&quot; target=&quot;_blank&quot;&gt;https://moon9342.github.io/jekyll-start&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;span class=&quot;table-of-contents-list&quot;&gt;
-  Github Page 전체 목차 입니다.
-&lt;/span&gt;&lt;/p&gt;
-
-&lt;ul class=&quot;table-of-contents-list&quot;&gt;
-  &lt;li&gt;
-    &lt;a href=&quot;./github-page-01&quot;&gt;
-      #01 Github Page 포스팅 개요
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./github-page-02&quot;&gt;
-      #02 Github Page를 위한 Jekyll 환경구축
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./github-page-03&quot;&gt;
-      #03 사이트 설정 (_config.yml)
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./github-page-04&quot;&gt;
-      #04 작성자(저자) 설정 (authors.yml)
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./github-page-05&quot;&gt;
-      #05 태그 설정 (tags.yml)
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./github-page-06&quot;&gt;
-      #06 메뉴 설정 (navigation.html)
-    &lt;/a&gt;
-  &lt;/li&gt;
-
-  &lt;li&gt;
-    &lt;a href=&quot;./github-page-07&quot;&gt;
-      #07 게시글 작성하기
-    &lt;/a&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;</content>
-
-      
-      
-      
-      
-      
-
-      <author>
-          <name>초코비</name>
-        
-        
-      </author>
-
-      
-
-      
-        <category term="github page" />
-      
-
-      
-        <summary type="html">Github Page 구축을 편하게 하기 위한 정적 홈페이지 생성기인 Jekyll을 설치해 보겠습니다.</summary>
       
 
       

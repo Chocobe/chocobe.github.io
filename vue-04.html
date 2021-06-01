@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- Document Settings -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Base Meta -->
+    <!-- dynamically fixing the title for tag/author pages -->
+
+
+
+    <title>#04 Transparent Wrapper Pattern</title>
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Styles'n'Scripts -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/screen.edited.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/built/syntax.css" />
+
+    <!-- custom.css -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/custom.css" />
+
+    <!-- 커스텀 스타일: Helper Class 생성부 -->
+    <!-- Prefix: .myStyle- -->
+    <link rel="stylesheet" type="text/css" href="/assets/built/myStyle.css" />
+
+    <!-- 나눔고딕  WebFont -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/earlyaccess/nanumgothic.css">
+    <!-- Hack Font -->
+    <link rel='stylesheet' href='//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css'>
+
+    <!-- FontAwesome v4-->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.3/css/all.css"
+      integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
+      crossorigin="anonymous"
+    >
+
+    <!-- highlight.js -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <style>.hljs { background: none; }</style>
+
+    <!--[if IE]>
+        <style>
+            p, ol, ul{
+                width: 100%;
+            }
+            blockquote{
+                width: 100%;
+            }
+        </style>
+    <![endif]-->
+    
+    <!-- This tag outputs SEO meta+structured data and other important settings -->
+    <meta name="description" content="FrontEnd 기술 블로그 입니다" />
+    <link rel="shortcut icon" href="http://localhost:4000/assets/images/favicon.png" type="image/png" />
+    <link rel="canonical" href="http://localhost:4000/vue-04" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+
+     <!--title below is coming from _includes/dynamic_title-->
+    <meta property="og:site_name" content="초코비 Front-End" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="#04 Transparent Wrapper Pattern" />
+    <meta property="og:description" content="Transparent Wrapper Pattern 이란? Transparent Wrapper Pattern 이란, native element (기본요소)를 감싸는 방식의 컴포넌트 패턴을 말합니다. 기본 요소에 특정 스타일 또는 추가 기능이 재사용 되는 경우, 매번 구현하는 것은 노가다 요소가 되버립니다. 또한 매번 구현했다면, 스타일이나 기능 변경 시, 노가다의 지옥이 열립니다. 위와같은 이유로 기본 요소에 추가된 부분이 재사용 될" />
+    <meta property="og:url" content="http://localhost:4000/vue-04" />
+    <meta property="og:image" content="http://localhost:4000/assets/images/tagImage/bg_vue.png" />
+    <meta property="article:publisher" content="https://www.facebook.com/" />
+    <meta property="article:author" content="https://www.facebook.com/" />
+    <meta property="article:published_time" content="2021-06-01T18:00:00+09:00" />
+    <meta property="article:modified_time" content="2021-06-01T18:00:00+09:00" />
+    <meta property="article:tag" content="Vue" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="#04 Transparent Wrapper Pattern" />
+    <meta name="twitter:description" content="Transparent Wrapper Pattern 이란? Transparent Wrapper Pattern 이란, native element (기본요소)를 감싸는 방식의 컴포넌트 패턴을 말합니다. 기본 요소에 특정 스타일 또는 추가 기능이 재사용 되는 경우, 매번 구현하는 것은 노가다 요소가 되버립니다. 또한 매번 구현했다면, 스타일이나 기능 변경 시, 노가다의 지옥이 열립니다. 위와같은 이유로 기본 요소에 추가된 부분이 재사용 될" />
+    <meta name="twitter:url" content="http://localhost:4000/" />
+    <meta name="twitter:image" content="http://localhost:4000/assets/images/tagImage/bg_vue.png" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="초코비 Front-End" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="Vue" />
+    <meta name="twitter:site" content="@" />
+    <meta name="twitter:creator" content="@" />
+    <meta property="og:image:width" content="1400" />
+    <meta property="og:image:height" content="933" />
+
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Website",
+    "publisher": {
+        "@type": "Organization",
+        "name": "초코비 Front-End",
+        "logo": "http://localhost:4000/assets/images/logo/logo.svg"
+    },
+    "url": "http://localhost:4000/vue-04",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://localhost:4000/assets/images/tagImage/bg_vue.png",
+        "width": 2000,
+        "height": 666
+    },
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://localhost:4000/vue-04"
+    },
+    "description": "Transparent Wrapper Pattern 이란? Transparent Wrapper Pattern 이란, native element (기본요소)를 감싸는 방식의 컴포넌트 패턴을 말합니다. 기본 요소에 특정 스타일 또는 추가 기능이 재사용 되는 경우, 매번 구현하는 것은 노가다 요소가 되버립니다. 또한 매번 구현했다면, 스타일이나 기능 변경 시, 노가다의 지옥이 열립니다. 위와같은 이유로 기본 요소에 추가된 부분이 재사용 될"
+}
+    </script>
+
+    <!-- <script type="text/javascript" src="https://demo.ghost.io/public/ghost-sdk.min.js?v=724281a32e"></script>
+    <script type="text/javascript">
+    ghost.init({
+    	clientId: "ghost-frontend",
+    	clientSecret: "f84a07a72b17"
+    });
+    </script> -->
+
+    <meta name="generator" content="Jekyll 3.6.2" />
+    <link rel="alternate" type="application/rss+xml" title="#04 Transparent Wrapper Pattern" href="/feed.xml" />
+
+
+</head>
+<body class="post-template">
+    <div class="site-wrapper">
+        <!-- All the main content gets inserted here, index.hbs, post.hbs, etc -->
+        <!-- default -->
+
+<!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template -->
+
+<header class="site-header outer">
+    <div class="inner">
+        <nav class="site-nav">
+    <div class="site-nav-left">
+        
+            <a class="site-nav-logo" href="https://chocobe.github.io"><img src="/assets/images/logo/logo.svg" alt="초코비 Front-End" /></a>
+<!--        -->
+<!--            <a class="site-nav-logo" href="http://localhost:4000/"><img src="/assets/images/logo/logo.svg" alt="초코비 Front-End" /></a>-->
+<!--        -->
+        
+        
+            <ul class="nav" role="menu">
+    <!-- 홈 -->
+    <li class="nav-home" role="menuitem">
+        <a href="/">
+            Home
+        </a>
+    </li>
+    
+    <li class="nav-home" role="menuitem">
+        <a class="myStyle-font-weight-900" href="/tag/vue">
+            Vue
+        </a>
+    </li>
+
+    <!-- About -->
+<!--    <li class="nav-about" role="menuitem">-->
+<!--        <a href="/about/">-->
+<!--            About-->
+<!--        </a>-->
+<!--    </li>-->
+
+    <!-- Javascript -->
+<!--    <li class="nav-js" role="menuitem">-->
+<!--        <a href="/tag/javascript/">-->
+<!--            Javascript-->
+<!--        </a>-->
+<!--    </li>-->
+
+    <!-- Webpack -->
+    <li class="nav-webpack" role="menuitem">
+        <a class="myStyle-font-weight-900" href="/tag/webpack/">
+            Webpack
+        </a>
+    </li>
+
+    <!-- Typescript -->
+<!--    <li class="nav-ts" role="menuitem">-->
+<!--        <a href="/tag/typescript/">-->
+<!--            Typescript-->
+<!--        </a>-->
+<!--    </li>-->
+
+    <!-- Github Page -->
+    <li>
+        <a class="myStyle-font-weight-900" href="/tag/github-page">
+            Github Page
+        </a>
+    </li>
+
+    <!-- Post 작성 시간순으로 모든 Post 보기 -->
+    <li class="nav-archive" role="menuitem">
+        <a href="/archive.html">
+            All Posts
+        </a>
+    </li>
+
+    <!-- Tag별 Post 보기 -->
+    <li class="nav-archive" role="menuitem">
+        <a href="/author_archive.html">
+            Tag별 Posts
+        </a>
+    </li>
+</ul>
+
+        
+    </div>
+    <div class="site-nav-right">
+        <div class="social-links">
+            
+            
+        </div>
+        
+    </div>
+</nav>
+
+    </div>
+</header>
+
+<!-- Everything inside the #post tags pulls data from the post -->
+<!-- #post -->
+
+<main id="site-main" class="site-main outer" role="main">
+    <div class="inner">
+
+        <article class="post-full  tag-vue post ">
+
+            <header class="post-full-header">
+                <section class="post-full-meta">
+                    <time class="post-full-meta-date" datetime=" 1 June 2021"> 1 June 2021</time>
+                    
+                        <span class="date-divider">/</span>
+                        
+                            
+                               <a href='/tag/vue/'>VUE</a>
+                            
+                        
+                    
+                </section>
+                <h1 class="post-full-title">#04 Transparent Wrapper Pattern</h1>
+            </header>
+
+            
+
+            <section class="post-full-content">
+                <div class="kg-card-markdown">
+                    <h2 id="transparent-wrapper-pattern-이란">Transparent Wrapper Pattern 이란?</h2>
+
+<p><code class="highlighter-rouge">Transparent Wrapper Pattern</code> 이란, <code class="highlighter-rouge">native element (기본요소)</code>를 감싸는 방식의 컴포넌트 패턴을 말합니다.</p>
+
+<p><code class="highlighter-rouge">기본 요소</code>에 특정 스타일 또는 추가 기능이 재사용 되는 경우, 매번 구현하는 것은 노가다 요소가 되버립니다.</p>
+
+<p>또한 매번 구현했다면, 스타일이나 기능 변경 시, 노가다의 지옥이 열립니다.</p>
+
+<p><br /></p>
+
+<p>위와같은 이유로 <code class="highlighter-rouge">기본 요소</code>에 추가된 부분이 재사용 될 때, 
+<span class="span-highlighter">기본요소</span> + <span class="span-highlighter">추가 부분</span>을 
+하나로 묶는 컴포넌트를 만들어야 하며, 이러한 컴포넌트 패턴을 <code class="highlighter-rouge">Transparent Wrapper Pattern</code> 이라고 합니다.</p>
+
+<p><br /></p>
+
+<p><code class="highlighter-rouge">Transparent Wrapper Pattern</code>의 이름은 중요한 의미를 가지고 있습니다.</p>
+
+<p><code class="highlighter-rouge">기본 요소</code>의 원래 기능은 <code class="highlighter-rouge">원본 그대로</code> 사용할 수 있어야 한다는 것입니다.</p>
+
+<p>즉, <code class="highlighter-rouge">기본 요소</code>의 원래 기능은 그대로 사용 가능한 상태에서, <code class="highlighter-rouge">추가 부분</code>이 더해진 컴포넌트를 의미 합니다.</p>
+
+<p><br /></p>
+
+<p>이하 사용할 용어를 정의하겠습니다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">기본 컴포넌트</code>: 기본 요소</li>
+  <li><code class="highlighter-rouge">래퍼 컴포넌트</code>: Transparent Wrapper Component</li>
+</ul>
+
+<p><br /></p>
+
+<p>먼저 <code class="highlighter-rouge">기본 컴포넌트</code>에서 지원할 수 있는 기능의 종류를 살펴보겠습니다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">Props</code></li>
+  <li><code class="highlighter-rouge">Event Listener</code></li>
+  <li><code class="highlighter-rouge">Slot</code></li>
+</ul>
+
+<p>위 항목들을 <code class="highlighter-rouge">래퍼 컴포넌트</code>에서 재정의 하기위해 반복 코딩을 한다면, 이것 또한 문제가 됩니다.</p>
+
+<p><code class="highlighter-rouge">Vue</code>는 이러한 상황에 사용할 수 있는 <code class="highlighter-rouge">Vue Instance Property</code>를 제공하고 있습니다.</p>
+
+<ul>
+  <li><code class="highlighter-rouge">vm.$attrs</code></li>
+  <li><code class="highlighter-rouge">vm.$listeners</code></li>
+  <li><code class="highlighter-rouge">vm.$scopedSlots</code></li>
+</ul>
+
+<p>이러한 <code class="highlighter-rouge">Vue Instance Property</code>를 사용하면, 중복 코딩 없이 <code class="highlighter-rouge">래퍼 컴포넌트</code>를 구현할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="vue-instance-property"><code class="highlighter-rouge">Vue Instance Property</code></h2>
+
+<h3 id="vmattrs"><code class="highlighter-rouge">vm.$attrs</code></h3>
+
+<p><code class="highlighter-rouge">vm.$attrs</code>는 부모로 부터 전달받은 <code class="highlighter-rouge">Props</code> 중, 컴포넌트 자신의 내부에 정의하지 않은 <code class="highlighter-rouge">Props</code>가 담기는 객체 입니다.</p>
+
+<p>다시말해, 컴포넌트 자신의 <code class="highlighter-rouge">Props</code>는 그대로 바인딩 되고, 바인딩 되지 못한 <code class="highlighter-rouge">Props</code>들을 모아둔 객체 입니다.</p>
+
+<p>이를 <code class="highlighter-rouge">래퍼 컴포넌트</code> 입장에서 본다면, <code class="highlighter-rouge">래퍼 컴포넌트</code>의 <code class="highlighter-rouge">$attrs</code>를 <code class="highlighter-rouge">기본 컴포넌트</code>에 바인딩 시켜므로써, 
+<code class="highlighter-rouge">기본 컴포넌트</code>의 기존 <code class="highlighter-rouge">Props</code>는 그대로 지원하게 됩니다.</p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- 래퍼 컴포넌트 --&gt;</span>
+<span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;</span><span class="err">기본컴포넌트</span> <span class="na">v-bind=</span><span class="s">"$attrs"</span><span class="nt">&gt;&lt;/</span><span class="err">기본컴포넌트</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>위의 코드는 우리가 의도했던 대로 동작되지는 않습니다.</p>
+
+<p>이유는 <code class="highlighter-rouge">Vue Instance</code>의 기본 설정에 의해, 컴포넌트 자신에게 정의되지 않은 <code class="highlighter-rouge">Props</code>는 자신의 <code class="highlighter-rouge">Root Element</code>에 바인딩 시키기 때문입니다.</p>
+
+<p>이 상태에서는 <code class="highlighter-rouge">Root Element</code>에 <code class="highlighter-rouge">Props</code>가 바인딩 되기 때문에, <code class="highlighter-rouge">$attrs</code>에는 빈 객체가 되버리므로, 의도한 대로 동작되지 않는 것입니다.</p>
+
+<p><code class="highlighter-rouge">Vue Property</code> 중 <span class="span-highlighter">inheritAttrs</span> 속성의 기본값이 <code class="highlighter-rouge">true</code>인데, 이 속성이 <code class="highlighter-rouge">true</code>라면 <code class="highlighter-rouge">vm.$attrs</code>를
+컴포넌트 자신의 <code class="highlighter-rouge">Root Element</code>에 바인딩 시킵니다.</p>
+
+<p>따라서, <code class="highlighter-rouge">inheritAttrs: false</code>로 설정하여 <code class="highlighter-rouge">기본 컴포넌트</code>에 <code class="highlighter-rouge">Props</code>를 전달할 수 있습니다.</p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;</span><span class="err">기본컴포넌트</span> <span class="na">v-bind=</span><span class="s">"$attrs"</span><span class="nt">&gt;&lt;/</span><span class="err">기본컴포넌트</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">script</span><span class="nt">&gt;</span>
+<span class="k">import</span> <span class="err">기본컴포넌트</span> <span class="k">from</span> <span class="s2">"..."</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">inheritAttrs</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="nt">&lt;/</span><span class="k">script</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<h3 id="vmlisteners"><code class="highlighter-rouge">vm.$listeners</code></h3>
+
+<p><code class="highlighter-rouge">vm.$listeners</code>는 전달받은 모든 <code class="highlighter-rouge">Event Listener</code>가 담기는 객체 입니다.</p>
+
+<p><code class="highlighter-rouge">래퍼 컴포넌트</code>에서 추가된 <code class="highlighter-rouge">Event</code>가 있다면, 해당 <code class="highlighter-rouge">Event Emiter Method</code>를 만들고, 
+<code class="highlighter-rouge">$listeners</code> 객체는 <code class="highlighter-rouge">기본 컴포넌트</code>의 <code class="highlighter-rouge">v-on</code> 디렉티브를 사용하여 그대로 전달해 주면 됩니다.</p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;</span><span class="err">기본컴포넌트</span> <span class="na">v-on=</span><span class="s">"$listeners"</span><span class="nt">&gt;&lt;/</span><span class="err">기본컴포넌트</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<h2 id="slot"><code class="highlighter-rouge">Slot</code></h2>
+
+<p><code class="highlighter-rouge">기본 컴포넌트</code>의 <code class="highlighter-rouge">Slot</code> 기능도 <code class="highlighter-rouge">래퍼 컴포넌트</code>에서 그대로 지원해줘야 합니다.</p>
+
+<p><code class="highlighter-rouge">래퍼 컴포넌트</code>에서의 <code class="highlighter-rouge">Slot</code>은 <code class="highlighter-rouge">기본 컴포넌트 바디</code>에서 <code class="highlighter-rouge">$scopedSlots</code>를 사용하여 반복문으로 구현할 수 있습니다.</p>
+
+<p>구현방식은 <code class="highlighter-rouge">Dynamic Slot Names</code>와 <code class="highlighter-rouge">Slot Props</code>를 사용 합니다.</p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;</span><span class="err">기본컴포넌트</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;template</span> <span class="na">v-for=</span><span class="s">"(_, name) in $scopedSlots"</span> <span class="na">v-slot:</span><span class="err">[</span><span class="na">name</span><span class="err">]="</span><span class="na">slotProps</span><span class="err">"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;slot</span> <span class="na">:name=</span><span class="s">"name"</span> <span class="na">v-bind=</span><span class="s">"slotProps"</span><span class="nt">&gt;&lt;/slot&gt;</span>
+      <span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/</span><span class="err">기본컴포넌트</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>지금까지의 처리를 <code class="highlighter-rouge">래퍼 컴포넌트</code>에 구현하면, <code class="highlighter-rouge">기본 컴포넌트</code>의 원래 기능을 모두 지원하며, <code class="highlighter-rouge">래퍼 컴포넌트</code>에서 추가한 기능 또는 스타일도 지원하는
+<code class="highlighter-rouge">Transparent Wrapper Component</code>가 완성 됩니다.</p>
+
+<p>아래 코드는 이번 포스팅의 모든 내용을 담은 예시 입니다.</p>
+
+<blockquote>
+  <p>경로: “@/components/myComp/MyInput.vue”</p>
+</blockquote>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="c">&lt;!-- header Slot --&gt;</span>
+    <span class="nt">&lt;slot</span> <span class="na">name=</span><span class="s">"header"</span> <span class="na">v-bind=</span><span class="s">"headerData"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div&gt;</span>
+        <span class="nt">&lt;p&gt;</span>｛｛ headerData.val1 ｝｝<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;p&gt;</span>｛｛ headerData.val2 ｝｝<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/slot&gt;</span>
+    
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">:value=</span><span class="s">"value"</span> <span class="err">@</span><span class="na">input=</span><span class="s">"emitInput"</span><span class="nt">&gt;</span>
+
+    <span class="c">&lt;!-- default Slot --&gt;</span>
+    <span class="nt">&lt;slot</span> <span class="na">v-bind=</span><span class="s">"defaultData"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div&gt;</span>
+        <span class="nt">&lt;p&gt;</span>｛｛ defaultData.val1 ｝｝<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;p&gt;</span>｛｛ defaultData.val2 ｝｝<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/slot&gt;</span>
+
+    <span class="c">&lt;!-- footer Slot --&gt;</span>
+    <span class="nt">&lt;slot</span> <span class="na">name=</span><span class="s">"footer"</span> <span class="na">v-bind=</span><span class="s">"footerData"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;div&gt;</span>
+        <span class="nt">&lt;p&gt;</span>｛｛ footerData.val1 ｝｝<span class="nt">&lt;/p&gt;</span>
+        <span class="nt">&lt;p&gt;</span>｛｛ footerData.val2 ｝｝<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/div&gt;</span>
+    <span class="nt">&lt;/slot&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">script</span><span class="nt">&gt;</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">props</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">value</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">type</span><span class="p">:</span> <span class="nb">String</span><span class="p">,</span>
+      <span class="na">default</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+
+  <span class="na">data</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">headerData</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">val1</span><span class="p">:</span> <span class="s2">"헤더 데이터 1"</span><span class="p">,</span>
+        <span class="na">val2</span><span class="p">:</span> <span class="s2">"헤더 데이터 2"</span><span class="p">,</span>
+      <span class="p">},</span>
+
+      <span class="na">defaultData</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">val1</span><span class="p">:</span> <span class="s2">"디폴트 데이터 1"</span><span class="p">,</span>
+        <span class="na">val2</span><span class="p">:</span> <span class="s2">"디폴트 데이터 2"</span><span class="p">,</span>
+      <span class="p">},</span>
+
+      <span class="na">footerData</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">val1</span><span class="p">:</span> <span class="s2">"푸터 데이터 1"</span><span class="p">,</span>
+        <span class="na">val2</span><span class="p">:</span> <span class="s2">"푸터 데이터 2"</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+
+  <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nx">emitInput</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">$emit</span><span class="p">(</span><span class="s2">"input"</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+<span class="nt">&lt;/</span><span class="k">script</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>경로: “@/components/myComp/MyInputWrapper.vue”</p>
+</blockquote>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;h3&gt;</span>래퍼 컴포넌트<span class="nt">&lt;/h3&gt;</span>
+
+    <span class="nt">&lt;MyInput</span> <span class="na">v-bind=</span><span class="s">"$attrs"</span> <span class="na">v-on=</span><span class="s">"$listeners"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;template</span> <span class="na">v-for=</span><span class="s">"(_, name) in $scopedSlots"</span> <span class="na">v-slot:</span><span class="err">[</span><span class="na">name</span><span class="err">]="</span><span class="na">slotProps</span><span class="err">"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;slot</span> <span class="na">:name=</span><span class="s">"name"</span> <span class="na">v-bind=</span><span class="s">"slotProps"</span><span class="nt">&gt;&lt;/slot&gt;</span>
+      <span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/MyInput&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">script</span><span class="nt">&gt;</span>
+<span class="k">import</span> <span class="nx">MyInput</span> <span class="k">from</span> <span class="s2">"@/components/myComp/MyInput.vue"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">inheritAttrs</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+
+  <span class="na">components</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nx">MyInput</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+<span class="nt">&lt;/</span><span class="k">script</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">style</span> <span class="na">scoped</span><span class="nt">&gt;</span>
+<span class="nc">.myInputWrapper</span> <span class="p">{</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">5px</span> <span class="nb">solid</span> <span class="m">#e25c00</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">&lt;/</span><span class="k">style</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>경로: “@/views/MyTestPage.vue”</p>
+</blockquote>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;MyInput</span> <span class="na">v-model=</span><span class="s">"value_1"</span><span class="nt">&gt;&lt;/MyInput&gt;</span>
+
+    <span class="nt">&lt;hr/&gt;</span>
+
+    <span class="nt">&lt;MyInputWrapper</span> <span class="na">v-model=</span><span class="s">"value_2"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;template</span> <span class="na">v-slot:header=</span><span class="s">"headerProps"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>헤더 데이터: ｛｛ headerProps ｝｝<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+
+      <span class="nt">&lt;</span><span class="k">template</span> <span class="na">v-slot=</span><span class="s">"defaultProps"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;p&gt;</span>기본 데이터: ｛｛ defaultProps ｝｝<span class="nt">&lt;/p&gt;</span>
+      <span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/MyInputWrapper&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/template&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">script</span><span class="nt">&gt;</span>
+<span class="k">import</span> <span class="nx">MyInput</span> <span class="k">from</span> <span class="s2">"@/component/myComp/MyInput.vue"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">MyInputWrapper</span> <span class="k">from</span> <span class="s2">"@/components/myComp/MyInputWrapper.vue"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">components</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nx">MyInput</span><span class="p">,</span>
+    <span class="nx">MyInputWrapper</span><span class="p">,</span>
+  <span class="p">},</span>
+
+  <span class="na">data</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">value_1</span><span class="p">:</span> <span class="s2">"Hello"</span><span class="p">,</span>
+      <span class="na">value_2</span><span class="p">:</span> <span class="s2">"World"</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+<span class="nt">&lt;/</span><span class="k">script</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">&lt;h3&gt;</code> 와 <code class="highlighter-rouge">스타일</code>이 추가된 <code class="highlighter-rouge">기본 컴포넌트</code>를 <code class="highlighter-rouge">래퍼 컴포넌트</code>를 만들어 재사용할 수 있게 되었습니다.</p>
+
+<p><img src="assets/images/vue/04_vue/04_vue_01.png" class="shadow" alt="Transparent Wrapper Pattern" /><br /></p>
+
+<blockquote>
+  <p>참고자료: <a href="https://zendev.com/2018/05/31/transparent-wrapper-components-in-vue.html" target="_blank">https://zendev.com/2018/05/31/transparent-wrapper-components-in-vue.html</a></p>
+</blockquote>
+
+<hr />
+
+<p><span class="table-of-contents-list">
+  Vue 포스팅은 여러 절로 구성되어 있습니다.
+</span></p>
+
+<ul class="table-of-contents-list">
+  <li>
+    <a href="./vue-01">
+      #01 <span class="span-highlighter">v-bind</span> 활용
+    </a>
+  </li>
+
+  <li>
+    <a href="./vue-02">
+      #02 vue.config.js의 <span class="span-highlighter">runtimeCompiler</span> 옵션
+    </a>
+  </li>
+
+  <li>
+    <a href="./vue-03">
+      #03 유효성 검사 3rd 라이브러리: vee-validate
+    </a>
+  </li>
+
+  <li>
+    <a href="./vue-04">
+      #04 Transparent Wrapper Pattern
+    </a>
+  </li>
+</ul>
+
+<hr />
+
+
+                </div>
+            </section>
+
+            <!-- Email subscribe form at the bottom of the page -->
+            
+
+            <footer class="post-full-footer">
+                <!-- Everything inside the #author tags pulls data from the author -->
+                <!-- #author-->
+                
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/chocobe/chocobe.png" alt="chocobe" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/chocobe">초코비</a></h4>
+                                
+                                    <p>Vue와 Typescript를 좋아합니다</p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/chocobe">Read More</a>
+                        </div>
+                    
+                
+                <!-- /author  -->
+            </footer>
+
+            <!-- If you use Disqus comments, just uncomment this block.
+            The only thing you need to change is "test-apkdzgmqhj" - which
+            should be replaced with your own Disqus site-id. -->
+            
+
+        </article>
+
+    </div>
+</main>
+
+<!-- Links to Previous/Next posts -->
+<aside class="read-next outer">
+    <div class="inner">
+        <div class="read-next-feed">
+            
+                
+                
+                
+                
+                    <article class="read-next-card"
+                        
+                            style="background-image: url(/assets/images/blog-cover.jpg)"
+                        
+                    >
+                        <header class="read-next-card-header">
+                            <small class="read-next-card-header-sitetitle">&mdash; 초코비 Front-End &mdash;</small>
+                            
+                                <h3 class="read-next-card-header-title"><a href="/tag/vue/">Vue</a></h3>
+                            
+                        </header>
+                        <div class="read-next-divider"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 14.5s2 3 5 3 5.5-2.463 5.5-5.5S21 6.5 18 6.5c-5 0-7 11-12 11C2.962 17.5.5 15.037.5 12S3 6.5 6 6.5s4.5 3.5 4.5 3.5"/></svg>
+</div>
+                        <div class="read-next-card-content">
+                            <ul>
+                                
+                                
+                                  
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/vue-03">#03 유효성 검사 3rd 라이브러리: vee-validate</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/vue-02">#02 vue.config.js의 <span class='span-highlighter'>runtimeCompiler</span> 옵션</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                    
+                                        
+                                        
+                                            <li><a href="/vue-01">#01 <span class='span-highlighter'>v-bind</span> 활용</a></li>
+                                        
+                                    
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                                  
+                                
+                            </ul>
+                        </div>
+                        <footer class="read-next-card-footer">
+                            <a href="/tag/vue/">
+                                
+                                    See all 3 posts  →
+                                
+                            </a>
+                        </footer>
+                    </article>
+                
+            
+
+            <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
+            
+
+            <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
+            
+                
+
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/vue-03">
+                <div class="post-card-image" style="background-image: url(/assets/images/tagImage/bg_vue.png)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/vue-03">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Vue</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">#03 유효성 검사 3rd 라이브러리: vee-validate</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    
+                        <p></p>
+                    
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/chocobe/chocobe.png" alt="초코비" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/chocobe/">초코비</a>
+                        </span>
+                    
+                
+                <span class="reading-time">
+                    
+                    
+                      1 min read
+                    
+                </span>
+            </footer>
+        </div>
+    </article>
+
+            
+
+        </div>
+    </div>
+</aside>
+
+<!-- Floating header which appears on-scroll, included from includes/floating-header.hbs -->
+<div class="floating-header">
+    <div class="floating-header-logo">
+        <a href="http://localhost:4000/">
+            
+            <span>초코비 Front-End</span>
+        </a>
+    </div>
+    <span class="floating-header-divider">&mdash;</span>
+    <div class="floating-header-title">#04 Transparent Wrapper Pattern</div>
+    <div class="floating-header-share">
+        <div class="floating-header-share-label">Share this <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M7.5 15.5V4a1.5 1.5 0 1 1 3 0v4.5h2a1 1 0 0 1 1 1h2a1 1 0 0 1 1 1H18a1.5 1.5 0 0 1 1.5 1.5v3.099c0 .929-.13 1.854-.385 2.748L17.5 23.5h-9c-1.5-2-5.417-8.673-5.417-8.673a1.2 1.2 0 0 1 1.76-1.605L7.5 15.5zm6-6v2m-3-3.5v3.5m6-1v2"/>
+</svg>
+</div>
+        <a class="floating-header-share-tw" href="https://twitter.com/share?text=%2304+Transparent+Wrapper+Pattern&amp;url=https://chocobe.github.io/vue-04"
+            onclick="window.open(this.href, 'share-twitter', 'width=550,height=235');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M30.063 7.313c-.813 1.125-1.75 2.125-2.875 2.938v.75c0 1.563-.188 3.125-.688 4.625a15.088 15.088 0 0 1-2.063 4.438c-.875 1.438-2 2.688-3.25 3.813a15.015 15.015 0 0 1-4.625 2.563c-1.813.688-3.75 1-5.75 1-3.25 0-6.188-.875-8.875-2.625.438.063.875.125 1.375.125 2.688 0 5.063-.875 7.188-2.5-1.25 0-2.375-.375-3.375-1.125s-1.688-1.688-2.063-2.875c.438.063.813.125 1.125.125.5 0 1-.063 1.5-.25-1.313-.25-2.438-.938-3.313-1.938a5.673 5.673 0 0 1-1.313-3.688v-.063c.813.438 1.688.688 2.625.688a5.228 5.228 0 0 1-1.875-2c-.5-.875-.688-1.813-.688-2.75 0-1.063.25-2.063.75-2.938 1.438 1.75 3.188 3.188 5.25 4.25s4.313 1.688 6.688 1.813a5.579 5.579 0 0 1 1.5-5.438c1.125-1.125 2.5-1.688 4.125-1.688s3.063.625 4.188 1.813a11.48 11.48 0 0 0 3.688-1.375c-.438 1.375-1.313 2.438-2.563 3.188 1.125-.125 2.188-.438 3.313-.875z"/></svg>
+
+        </a>
+        <a class="floating-header-share-fb" href="https://www.facebook.com/sharer/sharer.php?u=https://chocobe.github.io/vue-04"
+            onclick="window.open(this.href, 'share-facebook','width=580,height=296');return false;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path d="M19 6h5V0h-5c-3.86 0-7 3.14-7 7v3H8v6h4v16h6V16h5l1-6h-6V7c0-.542.458-1 1-1z"/></svg>
+
+        </a>
+    </div>
+    <progress class="progress" value="0">
+        <div class="progress-container">
+            <span class="progress-bar"></span>
+        </div>
+    </progress>
+</div>
+
+
+<!-- /post -->
+
+<!-- The #contentFor helper here will send everything inside it up to the matching #block helper found in default.hbs -->
+
+
+        <!-- Previous/next page links - displayed on every page -->
+        
+
+        <!-- The footer at the very bottom of the screen -->
+        <footer class="site-footer outer">
+            <div class="site-footer-content inner">
+                <section class="copyright"><a href="http://localhost:4000/">초코비 Front-End</a> &copy; 2021</section>
+                <section class="poweredby">Proudly published with <a href="https://jekyllrb.com/">Jekyll</a> &
+                    <a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages</a> using
+                    <a href="https://github.com/jekyller/jasper2" target="_blank" rel="noopener">Jasper2</a></section>
+                <nav class="site-footer-nav">
+                    <a href="/">Latest Posts</a>
+                    
+                    
+                    <a href="https://ghost.org" target="_blank" rel="noopener">Ghost</a>
+                </nav>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- The big email subscribe modal content -->
+    
+
+    <!-- highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-abap.min.js"></script>
+    <script>$(document).ready(function() {
+      $('pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    });</script>
+
+    <!-- jQuery + Fitvids, which makes all video embeds responsive -->
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="/assets/js/jquery.fitvids.js"></script>
+    <script type="text/javascript" src="https://demo.ghost.io/assets/js/jquery.fitvids.js?v=724281a32e"></script>
+
+
+    <!-- Paginator increased to "infinit" in _config.yml -->
+    <!-- if paginator.posts  -->
+    <!-- <script>
+        var maxPages = parseInt('');
+    </script>
+    <script src="/assets/js/infinitescroll.js"></script> -->
+    <!-- /endif -->
+
+    
+
+
+    <!-- Add Google Analytics  -->
+    <!-- Google Analytics Tracking code -->
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+
+ </script>
+
+
+    <!-- The #block helper will pull in data from the #contentFor other template files. In this case, there's some JavaScript which we only want to use in post.hbs, but it needs to be included down here, after jQuery has already loaded. -->
+    
+        <script>
+
+// NOTE: Scroll performance is poor in Safari
+// - this appears to be due to the events firing much more slowly in Safari.
+//   Dropping the scroll event and using only a raf loop results in smoother
+//   scrolling but continuous processing even when not scrolling
+$(document).ready(function () {
+    // Start fitVids
+    var $postContent = $(".post-full-content");
+    $postContent.fitVids();
+    // End fitVids
+
+    var progressBar = document.querySelector('progress');
+    var header = document.querySelector('.floating-header');
+    var title = document.querySelector('.post-full-title');
+
+    var lastScrollY = window.scrollY;
+    var lastWindowHeight = window.innerHeight;
+    var lastDocumentHeight = $(document).height();
+    var ticking = false;
+
+    function onScroll() {
+        lastScrollY = window.scrollY;
+        requestTick();
+    }
+
+    function onResize() {
+        lastWindowHeight = window.innerHeight;
+        lastDocumentHeight = $(document).height();
+        requestTick();
+    }
+
+    function requestTick() {
+        if (!ticking) {
+            requestAnimationFrame(update);
+        }
+        ticking = true;
+    }
+
+    function update() {
+        var trigger = title.getBoundingClientRect().top + window.scrollY;
+        var triggerOffset = title.offsetHeight + 35;
+        var progressMax = lastDocumentHeight - lastWindowHeight;
+
+        // show/hide floating header
+        if (lastScrollY >= trigger + triggerOffset) {
+            header.classList.add('floating-active');
+        } else {
+            header.classList.remove('floating-active');
+        }
+
+        progressBar.setAttribute('max', progressMax);
+        progressBar.setAttribute('value', lastScrollY);
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onResize, false);
+
+    update();
+});
+</script>
+
+    
+
+    <!-- Ghost outputs important scripts and data with this tag - it should always be the very last thing before the closing body tag -->
+    <!-- ghost_foot -->
+
+</body>
+</html>
