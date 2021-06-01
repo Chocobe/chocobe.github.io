@@ -371,6 +371,10 @@ into the {body} of the default.hbs template -->
 
 <p><code class="highlighter-rouge">slot props</code>로 넘어오는 데이터는 <code class="highlighter-rouge">Object</code>이며, <code class="highlighter-rouge">{ errors }</code>의 <code class="highlighter-rouge">[0]</code>번 인덱스가 <code class="highlighter-rouge">에러 메시지</code>로 넘어 옵니다.</p>
 
+<p><br /></p>
+
+<p>그리고 <code class="highlighter-rouge">&lt;ValidationProvider&gt;</code>의 바디에 작성된 <code class="highlighter-rouge">입력 요소</code>는 <code class="highlighter-rouge">v-model</code>이 연결되어 있어야 정상동작 합니다.</p>
+
 <p><br />&lt;hr/&gt;<br /></p>
 
 <h2 id="vee-validate-라이브러리에서-제공하는-규칙-사용하기"><code class="highlighter-rouge">vee-validate</code> 라이브러리에서 제공하는 <code class="highlighter-rouge">규칙</code> 사용하기</h2>
@@ -475,6 +479,8 @@ into the {body} of the default.hbs template -->
 <blockquote>
   <p><a href="https://github.com/logaretm/vee-validate/blob/v3/src/types.ts" target="_blank">하위 코드 Github: https://github.com/logaretm/vee-validate/blob/v3/src/types.ts</a></p>
 </blockquote>
+
+<hr />
 
 <h2 id="validationobserver-를-사용한-전체-유효성-상태값-사용하기"><code class="highlighter-rouge">&lt;ValidationObserver&gt;</code> 를 사용한 전체 유효성 상태값 사용하기</h2>
 
@@ -601,11 +607,401 @@ into the {body} of the default.hbs template -->
 
 <p><code class="highlighter-rouge">invalid</code>값을 사용하면, <code class="highlighter-rouge">버튼</code> 컴포넌트의 <code class="highlighter-rouge">disabled</code> 기능에 트리거를 사용할 수 있으므로, UX에 유용합니다.</p>
 
-<p><br /></p>
-
 <blockquote>
   <p><a href="https://vee-validate.logaretm.com/v3/guide/forms.html#handling-forms" target="_blank">https://vee-validate.logaretm.com/v3/guide/forms.html#handling-forms</a></p>
 </blockquote>
+
+<hr />
+
+<h2 id="전역-컴포넌트-등록">전역 컴포넌트 등록</h2>
+
+<p><code class="highlighter-rouge">&lt;ValidationObserver&gt;</code>와 <code class="highlighter-rouge">&lt;ValidationProvider&gt;</code>를 매 페이지에서 <code class="highlighter-rouge">import</code>하고 <code class="highlighter-rouge">extend</code>를 정의하여 사용하는 것은 코드 중복과 작업 비용이 큽니다.</p>
+
+<p>때문에 <code class="highlighter-rouge">Vue</code> 프레임워크의 <code class="highlighter-rouge">전역 컴포넌트</code>로 등록하여 사용하면 편리하게 사용할 수 있습니다.</p>
+
+<p><br /></p>
+
+<p><code class="highlighter-rouge">vee-validate</code> 라이브러리를 전역으로 등록하기 위한 파일을 생성합니다.</p>
+
+<blockquote>
+  <p>경로: “@/plugins/vee-validate/index.js”</p>
+</blockquote>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Vue</span> <span class="k">from</span> <span class="s2">"vue"</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="p">{</span> <span class="nx">ValidationObserver</span><span class="p">,</span> <span class="nx">ValidationProvider</span><span class="p">,</span> <span class="nx">extend</span> <span class="p">}</span> <span class="k">from</span> <span class="s2">"vee-validate"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">max</span><span class="p">,</span> <span class="nx">email</span><span class="p">,</span> <span class="nx">required</span> <span class="p">}</span> <span class="k">from</span> <span class="s2">"vee-validate/dist/rules"</span><span class="p">;</span>
+
+<span class="nx">Vue</span><span class="p">.</span><span class="nx">component</span><span class="p">(</span><span class="s2">"ValidationObserver"</span><span class="p">,</span> <span class="nx">ValidationObserver</span><span class="p">);</span>
+<span class="nx">Vue</span><span class="p">.</span><span class="nx">component</span><span class="p">(</span><span class="s2">"ValidationProvider"</span><span class="p">,</span> <span class="nx">ValidationProvider</span><span class="p">);</span>
+
+<span class="c1">// rule: "max"</span>
+<span class="nx">extend</span><span class="p">(</span><span class="s2">"max"</span><span class="p">,</span> <span class="p">{</span>
+  <span class="p">...</span><span class="nx">max</span><span class="p">,</span>
+  <span class="na">message</span><span class="p">:</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">,</span> <span class="nx">placeholders</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">fieldName</span><span class="p">}</span><span class="s2"> 은(는) </span><span class="p">${</span><span class="nx">placeholders</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span><span class="s2"> 자를 넘을 수 없습니다.`</span><span class="p">;</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="c1">// rule: "email"</span>
+<span class="nx">extend</span><span class="p">(</span><span class="s2">"email"</span><span class="p">,</span> <span class="p">{</span>
+  <span class="p">...</span><span class="nx">email</span><span class="p">,</span>
+  <span class="na">message</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">`Email 형식이 잘못 되었습니다.`</span><span class="p">;</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+
+<span class="c1">// rule: "required"</span>
+<span class="nx">extend</span><span class="p">(</span><span class="s2">"required"</span><span class="p">,</span> <span class="p">{</span>
+  <span class="p">...</span><span class="nx">required</span><span class="p">,</span>
+  <span class="na">message</span><span class="p">:</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">fieldName</span><span class="p">}</span><span class="s2"> 은(는) 필수입력 항목 입니다.`</span><span class="p">;</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>생성한 <code class="highlighter-rouge">vee-validate.js</code> 파일을 <code class="highlighter-rouge">main.js</code>에서 <code class="highlighter-rouge">import</code> 합니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ...생략</span>
+<span class="k">import</span> <span class="s2">"@/plugins/vee-validate"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><br /></p>
+
+<p>이제 <code class="highlighter-rouge">&lt;ValidationObserver&gt;</code>와 <code class="highlighter-rouge">&lt;ValidationProvider&gt;</code>는 전역 컴포넌트 이므로, 각 페이지에서 별도의 <code class="highlighter-rouge">import 없이</code> 바로 사용할 수 있습니다.</p>
+
+<p>또한, <code class="highlighter-rouge">vee-validate.js</code>에서 <code class="highlighter-rouge">extend</code>에 등록한 <code class="highlighter-rouge">규칙</code>도 전역에서 사용할 수 있습니다.</p>
+
+<hr />
+
+<h2 id="validationobserver-주요-기능-정리"><code class="highlighter-rouge">&lt;ValidationObserver&gt;</code> 주요 기능 정리</h2>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;ValidationObserver</span> <span class="na">v-slot=</span><span class="s">"</span>{ invalid }" ref="observer"&gt;
+    <span class="c">&lt;!-- 하위 Provider --&gt;</span>
+    <span class="nt">&lt;ValidationProvider&gt;</span>...<span class="nt">&lt;/ValidationProvider&gt;</span>
+    <span class="nt">&lt;ValidationProvider&gt;</span>...<span class="nt">&lt;/ValidationProvider&gt;</span>
+    <span class="nt">&lt;ValidationProvider&gt;</span>...<span class="nt">&lt;/ValidationProvider&gt;</span>
+
+    <span class="c">&lt;!-- "invalid" 가 true이면, disabled --&gt;</span>
+    <span class="c">&lt;!-- 버튼 요소 (vuetify 컴포넌트를 사용한 예시) --&gt;</span>
+    <span class="nt">&lt;v-btn</span> <span class="na">:disabled=</span><span class="s">"invalid"</span> <span class="err">@</span><span class="na">click=</span><span class="s">"mySubmit"</span><span class="nt">&gt;</span>전송 버튼<span class="nt">&lt;/v-btn&gt;</span>
+  <span class="nt">&lt;/ValidationObserver&gt;</span>
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">script</span><span class="nt">&gt;</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
+    <span class="k">async</span> <span class="nx">mySubmit</span><span class="p">()</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">observer</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$refs</span><span class="p">.</span><span class="nx">observer</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">isValid</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">observer</span><span class="p">.</span><span class="nx">validate</span><span class="p">();</span>
+
+      <span class="k">if</span><span class="p">(</span><span class="nx">isValid</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 유효성 검사 통과</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// 유효성 검사 실패</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nt">&lt;/</span><span class="k">script</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<ol>
+  <li><code class="highlighter-rouge">v-slot="{ invalid }</code>
+    <ul>
+      <li><code class="highlighter-rouge">&lt;ValidationObserver&gt;</code> 하위에 있는 <code class="highlighter-rouge">&lt;ValidationProvider&gt;</code>중, 하나라도 유효하지 않으면 <code class="highlighter-rouge">true</code>값</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">ref="observer</code>
+    <ul>
+      <li><code class="highlighter-rouge">&lt;script&gt;</code>에서 <code class="highlighter-rouge">&lt;ValidationObserver&gt;</code>객체의 메서드를 사용하기 위한 참조명</li>
+      <li><code class="highlighter-rouge">await observer.validate()</code>
+        <ul>
+          <li>비동기 메서드</li>
+          <li>반환형: <code class="highlighter-rouge">boolean</code></li>
+          <li>모든 입력값이 유효할 경우, <code class="highlighter-rouge">true</code>값</li>
+        </ul>
+      </li>
+      <li><code class="highlighter-rouge">observer.reset()</code>
+        <ul>
+          <li>반환형: <code class="highlighter-rouge">void</code></li>
+          <li>모든 유효성 상태값을 <code class="highlighter-rouge">초기화</code></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="validationprovider-주요-기능-정리"><code class="highlighter-rouge">&lt;ValidationProvider&gt;</code> 주요 기능 정리</h2>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;ValidationObserver&gt;</span>
+    <span class="nt">&lt;ValidationProvider</span> 
+      <span class="na">name=</span><span class="s">"컴포넌트명"</span>
+      <span class="na">v-slot=</span><span class="s">"</span>{ errors }"
+      rules="{ 규칙명: true, 규칙명: { 속성명: 값 } }" 
+    &gt;
+      <span class="c">&lt;!-- 입력 요소 (vuetify 컴포넌트를 사용한 예시) --&gt;</span>
+      <span class="nt">&lt;v-text-field</span>
+        <span class="na">v-model=</span><span class="s">"email"</span> 
+        <span class="na">label=</span><span class="s">"이메일"</span> 
+        <span class="na">:error-messages=</span><span class="s">"errors"</span>
+      <span class="nt">&gt;&lt;/v-text-field&gt;</span>
+    <span class="nt">&lt;/ValidationProvider&gt;</span>
+  <span class="nt">&lt;/ValidationObserver&gt;</span>
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<ol>
+  <li><code class="highlighter-rouge">name</code>
+    <ul>
+      <li>유효성 검사 컴포넌트명 - 일반적으로 입력 컴포넌트명과 동일하게 사용</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">v-slot="{ errors }</code>
+    <ul>
+      <li>입력 요소의 <code class="highlighter-rouge">유효성 상태값</code>이 <code class="highlighter-rouge">false</code>일 경우, <code class="highlighter-rouge">에러 메시지</code>를 전달하는 <code class="highlighter-rouge">Slot Props</code></li>
+      <li>type: <code class="highlighter-rouge">string[]</code></li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">rules</code>
+    <ul>
+      <li>유효성 검사 규칙 설정</li>
+      <li><code class="highlighter-rouge">규칙명</code>
+        <ul>
+          <li><code class="highlighter-rouge">extend</code>에 등록한 <code class="highlighter-rouge">규칙명</code> (첫번째 인자)</li>
+          <li>type: <code class="highlighter-rouge">string</code></li>
+        </ul>
+      </li>
+      <li><code class="highlighter-rouge">규칙명: true</code>
+        <ul>
+          <li><code class="highlighter-rouge">규칙명</code>을 적용</li>
+        </ul>
+      </li>
+      <li><code class="highlighter-rouge">규칙명: { 속성명: 속성값 }</code>
+        <ul>
+          <li>설정할 <code class="highlighter-rouge">규칙</code>에 <code class="highlighter-rouge">Params</code>를 함께 전달</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>입력 요소의 <code class="highlighter-rouge">v-model</code>
+    <ul>
+      <li><code class="highlighter-rouge">v-model</code>이 연결되어 있어야 <code class="highlighter-rouge">&lt;ValidationProvider&gt;</code>에서 해당 값을 검사할 수 있습니다.</li>
+    </ul>
+  </li>
+</ol>
+
+<hr />
+
+<h2 id="validationprovider-입력요소에-v-model을-사용할-수-없는-경우"><code class="highlighter-rouge">&lt;ValidationProvider&gt;</code> 입력요소에 <code class="highlighter-rouge">v-model</code>을 사용할 수 없는 경우</h2>
+
+<p><code class="highlighter-rouge">v-model</code>은 간편한 양방향 바인딩 기능 입니다.</p>
+
+<p>하지만 <code class="highlighter-rouge">v-model</code>을 사용할 수 없는 경우도 있기 때문에, <code class="highlighter-rouge">v-model</code>을 사용하지 않는 방법을 알아보겠습니다.</p>
+
+<p><br /></p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;ValidationObserver&gt;</span>
+    <span class="nt">&lt;ValidationProvider</span> 
+      <span class="na">v-slot=</span><span class="s">"</span>{ errors, validate }" 
+      name="커스텀 검사" 
+      :rules="{ required: true }"
+    &gt;
+      커스텀 입력: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">:value=</span><span class="s">"myCustom"</span> <span class="err">@</span><span class="na">input=</span><span class="s">"validate"</span><span class="nt">&gt;</span> 
+    <span class="nt">&lt;/ValidationProvider&gt;</span>
+  <span class="nt">&lt;/ValidationObserver&gt;</span>
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">script</span><span class="nt">&gt;</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">data</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">myCustom</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+<span class="nt">&lt;/</span><span class="k">script</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p><code class="highlighter-rouge">&lt;ValidationProvider&gt;</code>의 <code class="highlighter-rouge">v-slot</code>에 새로운 속성인 <code class="highlighter-rouge">validate</code>가 보입니다.</p>
+
+<p><code class="highlighter-rouge">Slot Props</code>로 넘겨받는 객체의 <code class="highlighter-rouge">validate</code> 함수가 <code class="highlighter-rouge">유효성 검사 함수</code> 입니다.</p>
+
+<p><code class="highlighter-rouge">&lt;ValidationProvider&gt;</code>의 하위 입력요소에 <code class="highlighter-rouge">v-model</code>을 사용하면 자동으로 바인딩 되지만, <code class="highlighter-rouge">v-model</code>을 사용하지 않기 때문에, 직접 사용해야 합니다.</p>
+
+<p><br /></p>
+
+<p><code class="highlighter-rouge">&lt;ValidationProvider&gt;</code>의 하위 입력요소의 데이터 바인딩은 <code class="highlighter-rouge">:value</code>에 하였고, <code class="highlighter-rouge">@input</code> 이벤트에 <code class="highlighter-rouge">validate</code>를 바인딩 하였습니다.</p>
+
+<p>즉, <code class="highlighter-rouge">:value="myCustom"</code>값이 변경될 때마다 <code class="highlighter-rouge">validate</code> 함수가 실행되며, <code class="highlighter-rouge">&lt;ValidationProvider&gt;</code>의 <code class="highlighter-rouge">유효성 상태값</code>이 변경 됩니다.</p>
+
+<p><br /></p>
+
+<p>위의 예제는 <code class="highlighter-rouge">&lt;input&gt;</code>에 단방향 통신으로 바인딩 하였기 때문에, 입력기능이 동작하지 않습니다.</p>
+
+<p><code class="highlighter-rouge">&lt;input @input="validate"&gt;</code>로는 입력 컴포넌트로써 기능을 하지 않는 문제가 발생한 것입니다.</p>
+
+<p>이를 해결하기 위해, <code class="highlighter-rouge">&lt;script&gt;</code>에서 양방향 통신을 구현하고, 동시에 <code class="highlighter-rouge">유효성 검사</code>를 수행하도록 <code class="highlighter-rouge">함수</code>를 만들어야 합니다.</p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;ValidationObserver&gt;</span>
+    <span class="nt">&lt;ValidationProvider</span> 
+      <span class="na">v-slot=</span><span class="s">"</span>{ errors }" 
+      name="커스텀 검사" 
+      :rules="{ required: true }"
+      ref="myCustomProvider"
+    &gt;
+      커스텀 입력: <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">:value=</span><span class="s">"myCustom"</span> <span class="err">@</span><span class="na">input=</span><span class="s">"myInputFunc"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;/ValidationProvider&gt;</span>
+  <span class="nt">&lt;/ValidationObserver&gt;</span>
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">script</span><span class="nt">&gt;</span>
+<span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
+  <span class="na">data</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">{</span>
+      <span class="na">myCustom</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">},</span>
+
+  <span class="na">methods</span><span class="p">:</span> <span class="p">{</span>
+    <span class="k">async</span> <span class="nx">myInputFunc</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 양방향 통신 구현</span>
+      <span class="kd">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">event</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">myCustom</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+
+      <span class="c1">// ValidationProvider를 사용한 유효성 검사</span>
+      <span class="kd">const</span> <span class="nx">provider</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">$refs</span><span class="p">.</span><span class="nx">myCustomProvider</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="p">{</span> <span class="nx">valid</span> <span class="p">}</span> <span class="o">=</span> <span class="kr">await</span> <span class="nx">provider</span><span class="p">.</span><span class="nx">validate</span><span class="p">(</span><span class="nx">event</span><span class="p">);</span>
+
+      <span class="k">if</span><span class="p">(</span><span class="nx">valid</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 유효성 검사 통과</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// 유효성 검사 실패</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+<span class="nt">&lt;/</span><span class="k">script</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<p>양방향 통신을 구현한 <code class="highlighter-rouge">myInputFunc()</code>에서 <code class="highlighter-rouge">$refs</code>를 사용하여 <code class="highlighter-rouge">&lt;ValidationProvider&gt;</code> 객체를 참조 하였습니다.</p>
+
+<p><code class="highlighter-rouge">&lt;ValidationProvider&gt;</code>객체는 <code class="highlighter-rouge">validate()</code> 비동기 함수를 가지며, 인자로 <code class="highlighter-rouge">event</code>객체를 넘겨줍니다.</p>
+
+<p>유효성 검사 결과 객체를 반환하는데 해당 interface는 다음과 같습니다.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// validate() 함수</span>
+<span class="c1">// 메뉴얼상 "...arg[]" 인자는 ``event`` 객체를 전달하고 있습니다.</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">validate</span><span class="p">(...</span><span class="nx">args</span><span class="p">:</span> <span class="nx">any</span><span class="p">[]):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">ValidationResult</span><span class="o">&gt;</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">syncValue</span><span class="p">(</span><span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+  <span class="p">}</span>
+
+  <span class="k">return</span> <span class="nx">triggerThreadSafeValidation</span><span class="p">(</span><span class="k">this</span> <span class="k">as</span> <span class="nx">ProviderInstance</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// 반환 타입</span>
+<span class="k">export</span> <span class="kr">interface</span> <span class="nx">ValidationResult</span> <span class="p">{</span>
+  <span class="na">valid</span><span class="p">:</span> <span class="kr">boolean</span><span class="p">;</span>
+  <span class="nl">errors</span><span class="p">:</span> <span class="nx">string</span><span class="p">[];</span>
+  <span class="nl">failedRules</span><span class="p">:</span> <span class="nx">Record</span><span class="o">&lt;</span><span class="nx">string</span><span class="p">,</span> <span class="nx">string</span><span class="o">&gt;</span><span class="p">;</span>
+  <span class="nx">regenerateMap</span><span class="p">?:</span> <span class="nx">Record</span><span class="o">&lt;</span><span class="nx">string</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">string</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위의 interface 중, 반환타입인 <code class="highlighter-rouge">ValidationResult</code>의 <code class="highlighter-rouge">valid</code> 속성이 유효성 검사 결과값 입니다.</p>
+
+<hr />
+
+<h2 id="extend-를-사용한-규칙-정의-정리"><code class="highlighter-rouge">extend()</code> 를 사용한 규칙 정의 정리</h2>
+
+<p><code class="highlighter-rouge">extend()</code> 메서드는 규칙을 정의할 수 있습니다.</p>
+
+<div class="language-vue highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;</span><span class="k">template</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;ValidationProvider</span> <span class="na">:rules=</span><span class="s">"</span>{ 규칙명1: true, 규칙명2: { 속성명1: 속성값1, 속성명2: 속성값2 } }"&gt;
+      <span class="nt">&lt;input&gt;</span>
+    <span class="nt">&lt;/ValidationProvider&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/</span><span class="k">template</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;</span><span class="k">script</span><span class="nt">&gt;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">extend</span> <span class="p">}</span> <span class="k">from</span> <span class="s2">"vee-validate"</span><span class="p">;</span>
+
+<span class="nx">extend</span><span class="p">(</span><span class="s2">"규칙명1"</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 유효성 검사 함수  </span>
+  <span class="na">validate</span><span class="p">:</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="s2">"유효성 검사 성공"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="na">message</span><span class="p">:</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">"에러 메시지"</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">extend</span><span class="p">(</span><span class="s2">"규칙명2"</span><span class="p">,</span> <span class="p">{</span>
+  <span class="c1">// 전달인자명 배열</span>
+  <span class="na">params</span><span class="p">:</span> <span class="p">[</span><span class="s2">"속성명1"</span><span class="p">,</span> <span class="s2">"속성명2"</span><span class="p">],</span>
+
+  <span class="c1">// 유효성 검사 함수</span>
+  <span class="na">validate</span><span class="p">:</span> <span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="p">{</span> <span class="err">속성명</span><span class="mi">1</span><span class="p">,</span> <span class="err">속성명</span><span class="mi">2</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span><span class="p">(</span><span class="s2">"유효성 검사 성공"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="na">message</span><span class="p">:</span> <span class="p">(</span><span class="nx">fieldName</span><span class="p">,</span> <span class="p">{</span> <span class="err">속성명</span><span class="mi">1</span><span class="p">,</span> <span class="err">속성명</span><span class="mi">2</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">"에러 메시지"</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+<span class="nt">&lt;/</span><span class="k">script</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<hr />
+
+<h2 id="vee-validate-에서-제공하는-rules"><code class="highlighter-rouge">vee-validate</code> 에서 제공하는 <code class="highlighter-rouge">rules</code></h2>
+
+<p>자주 사용하는 유효성 검사는 <code class="highlighter-rouge">vee-validate</code>에서 제공 하고 있습니다.</p>
+
+<blockquote>
+  <p><a href="https://vee-validate.logaretm.com/v3/guide/rules.html#rules" target="_blank">rules: https://vee-validate.logaretm.com/v3/guide/rules.html#rules</a></p>
+</blockquote>
+
+<p>제공되는 <code class="highlighter-rouge">rules</code>를 사용하며, <code class="highlighter-rouge">message</code>만 커스텀 한다면, 다음과 같이 작성할 수 있습니다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">extend</span> <span class="p">}</span> <span class="k">from</span> <span class="s2">"vee-validate"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">max</span> <span class="p">}</span> <span class="k">from</span> <span class="s2">"vee-validate/dist/rules"</span><span class="p">;</span>
+
+<span class="nx">extend</span><span class="p">(</span><span class="s2">"규칙명"</span><span class="p">,</span> <span class="p">{</span>
+  <span class="p">...</span><span class="nx">max</span><span class="p">,</span>
+  <span class="na">message</span><span class="p">:</span> <span class="p">(</span><span class="nx">field</span><span class="p">,</span> <span class="nx">placeholder</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">"커스텀 메시지"</span><span class="p">;</span>
+  <span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>이상 <code class="highlighter-rouge">vee-validate</code> 라이브러리에 대한 포스팅을 마치겠습니다.</p>
+
+<p><code class="highlighter-rouge">vee-validate</code> 라이브러리의 간편한 유효성 검사기능이 매우 만족스러웠습니다.</p>
+
+<p>유효성 검사를 위해 제가 만든 컴포넌트에 비해 <code class="highlighter-rouge">script</code>의 코드 라인수를 줄일 수 있어서 더 좋았습니다.</p>
+
+<p><code class="highlighter-rouge">vee-validate</code> 라이브러리를 사용할 기회가 생긴다면, 꼭 사용하고 싶은 라이브러리 였습니다.</p>
 
 <hr />
 
